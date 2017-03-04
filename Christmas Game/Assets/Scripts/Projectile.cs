@@ -6,14 +6,14 @@ public class Projectile : MonoBehaviour
 {
     public GameObject PREFAB_PARTICLES;
 
-    public float speed;
+    public Vector2 speed;
     private Rigidbody2D rb2b;
 
     // Use this for initialization
     void Start()
     {
         rb2b = this.gameObject.GetComponent<Rigidbody2D>();
-        rb2b.velocity = new Vector2(speed * transform.localScale.x, 0.0f);
+        rb2b.velocity = new Vector2(speed.x * transform.localScale.x, speed.y * transform.localScale.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public GameObject PREFAB_SNOWBALL;
     public GameObject PREFAB_BOMB;
 
+    public GameObject PREFAB_DEATH_PARTICLES;
+
     [Header("Transform Points")]
     public Transform mFirePoint;
     public Transform mGroundChecker;
@@ -40,6 +42,9 @@ public class Player : MonoBehaviour
     // health variables
     public int MAX_HEALTH = 3;
     private int mHealth;
+
+    [Header("Ammo")]
+    public int m_amount_bombs = 100;
 
     // knockback variables
     public float mKnockBackSpeed;
@@ -108,6 +113,7 @@ public class Player : MonoBehaviour
 
         if (mHealth <= 0)
         {
+            Instantiate(PREFAB_DEATH_PARTICLES, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
@@ -150,11 +156,13 @@ public class Player : MonoBehaviour
             mAnimator.SetTrigger("Throw");
         }
 
-        if (Input.GetKeyDown(KEY_BOMB))
+        if (Input.GetKeyDown(KEY_BOMB) && m_amount_bombs > 0)
         {
             GameObject obj = Instantiate(PREFAB_BOMB, mFirePoint.position, mFirePoint.rotation);
             obj.transform.localScale = transform.localScale;
             mAnimator.SetTrigger("Throw");
+
+            m_amount_bombs--;
         }
     }
 

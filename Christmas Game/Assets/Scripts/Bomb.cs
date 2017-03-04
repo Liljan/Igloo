@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
@@ -21,10 +22,29 @@ public class Bomb : MonoBehaviour
         if (timer <= 0.0f)
         {
             timer -= Time.deltaTime;
-            Instantiate(PREFAB_BOMB, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            Explode();
         }
 
         timer -= Time.deltaTime;
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.collider.CompareTag("Explosion"))
+        {
+            StartCoroutine(Explode(0.1f));
+        }
+    }
+
+    public void Explode()
+    {
+        StartCoroutine(Explode(0.0f));
+    }
+
+    public IEnumerator Explode(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Instantiate(PREFAB_BOMB, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
     }
 }

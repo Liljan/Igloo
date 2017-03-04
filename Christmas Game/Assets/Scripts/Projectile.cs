@@ -16,12 +16,6 @@ public class Projectile : MonoBehaviour
         rb2b.velocity = new Vector2(speed * transform.localScale.x, 0.0f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(this.gameObject);

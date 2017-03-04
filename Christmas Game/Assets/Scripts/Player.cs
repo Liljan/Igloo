@@ -4,18 +4,33 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     // Prefabs
+    [Header("Prefabs")]
     public GameObject PREFAB_SNOWBALL;
+    public GameObject PREFAB_BOMB;
+
+    [Header("Transform Points")]
     public Transform mFirePoint;
+    public Transform mGroundChecker;
+    private float mGroundCheckRadius = 0.1f;
+
+    [Header("Collision")]
+    public LayerMask mWhatIsGround;
+
+    // Controller Variables
+    [Header("Controls")]
+    public KeyCode KEY_LEFT;
+    public KeyCode KEY_RIGHT;
+    public KeyCode KEY_JUMP;
+    public KeyCode KEY_SHOOT;
+    public KeyCode KEY_BOMB;
 
     // components
     private Rigidbody2D mRb2d;
     private Animator mAnimator;
     private SpriteRenderer mSpriteRenderer;
-    public Transform mGroundChecker;
-    private float mGroundCheckRadius = 0.1f;
-    public LayerMask mWhatIsGround;
 
     // movement variables
+    [Header("Gameplay Variables")]
     public float mSpeed = 1.0f;
     public int MAX_JUMPS = 2;
     public float mJumpForce;
@@ -32,12 +47,6 @@ public class Player : MonoBehaviour
     public float MAX_KNOCK_BACK_TIME;
     public float mKnockBackTimer = 0.0f;
 
-    // Controller Variables
-    public KeyCode KEY_LEFT;
-    public KeyCode KEY_RIGHT;
-    public KeyCode KEY_JUMP;
-    public KeyCode KEY_SHOOT;
-
     public void Awake()
     {
         mRb2d = GetComponent<Rigidbody2D>();
@@ -46,7 +55,6 @@ public class Player : MonoBehaviour
 
         mIsGrounded = true;
         mHealth = MAX_HEALTH;
-
     }
 
     private IEnumerator DamageFlash(float dt)
@@ -138,6 +146,13 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KEY_SHOOT))
         {
             GameObject obj = Instantiate(PREFAB_SNOWBALL, mFirePoint.position, mFirePoint.rotation);
+            obj.transform.localScale = transform.localScale;
+            mAnimator.SetTrigger("Throw");
+        }
+
+        if (Input.GetKeyDown(KEY_BOMB))
+        {
+            GameObject obj = Instantiate(PREFAB_BOMB, mFirePoint.position, mFirePoint.rotation);
             obj.transform.localScale = transform.localScale;
             mAnimator.SetTrigger("Throw");
         }

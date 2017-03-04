@@ -3,9 +3,13 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+    // Prefabs
+    public GameObject PREFAB_SNOWBALL;
+    public Transform mFirePoint;
+
     // components
     private Rigidbody2D mRb2d;
-    // private Animator mAnimator;
+    private Animator mAnimator;
     private SpriteRenderer mSpriteRenderer;
     public Transform mGroundChecker;
     private float mGroundCheckRadius = 0.1f;
@@ -17,11 +21,6 @@ public class Player : MonoBehaviour
     public float mJumpForce;
     private int mJumps = 0;
     private bool mIsGrounded = false;
-
-    // ladder variables
-    // private bool mIsOnLadder = false;
-    // public float mClimbSpeed;
-    // private float mGravityStore;
 
     // health variables
     public int MAX_HEALTH = 3;
@@ -42,13 +41,12 @@ public class Player : MonoBehaviour
     public void Awake()
     {
         mRb2d = GetComponent<Rigidbody2D>();
-        //   mAnimator = GetComponent<Animator>();
-        //   mSpriteRenderer = GetComponent<SpriteRenderer>();
+        mAnimator = GetComponent<Animator>();
+        mSpriteRenderer = GetComponent<SpriteRenderer>();
 
         mIsGrounded = true;
         mHealth = MAX_HEALTH;
 
-        //  mGravityStore = mRb2d.gravityScale;
     }
 
     private IEnumerator DamageFlash(float dt)
@@ -67,7 +65,6 @@ public class Player : MonoBehaviour
     public void Update()
     {
         Move();
-        UpdateAnimations();
 
         mKnockBackTimer -= Time.deltaTime;
     }
@@ -94,7 +91,7 @@ public class Player : MonoBehaviour
         if (mIsGrounded)
             mJumps = 0;
 
-        //mAnimator.SetBool("Grounded", mIsGrounded);
+        mAnimator.SetBool("Grounded", mIsGrounded);
     }
 
     public void TakeDamage(int dmg)
@@ -112,15 +109,6 @@ public class Player : MonoBehaviour
         mHealth += h;
     }
 
-    private void UpdateAnimations()
-    {
-        /*  mAnimator.SetBool("Running", Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f);
-
-          mAnimator.SetBool("OnLadder", mIsOnLadder);
-
-          mAnimator.SetBool("Climbing", mIsOnLadder && Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f); */
-    }
-
     private void Move()
     {
         float x = 0.0f;
@@ -130,7 +118,8 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KEY_LEFT))
         {
             x = -1.0f;
-        }else if (Input.GetKey(KEY_RIGHT))
+        }
+        else if (Input.GetKey(KEY_RIGHT))
         {
             x = 1.0f;
         }
@@ -138,6 +127,8 @@ public class Player : MonoBehaviour
         mRb2d.velocity = new Vector2(mSpeed * x, mRb2d.velocity.y);
 
         SetFacingDirection(x);
+        // update animation
+        mAnimator.SetFloat("Speed", Mathf.Abs(x));
 
         if (Input.GetKeyDown(KEY_JUMP) && mJumps < MAX_JUMPS - 1)
         {
@@ -146,7 +137,9 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KEY_SHOOT))
         {
-            Debug.Log("When you gotta shoot, shoot. Don't talk.");
+            GameObject obj = Instantiate(PREFAB_SNOWBALL, mFirePoint.position, mFirePoint.rotation);
+            obj.transform.localScale = transform.localScale;
+            mAnimator.SetTrigger("Throw");
         }
     }
 

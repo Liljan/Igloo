@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    private char mID;
+    private int mID;
     private GameHandler mGameHandler;
 
     // Prefabs
@@ -47,8 +47,8 @@ public class Player : MonoBehaviour
     private int mHealth;
 
     [Header("Ammo")]
-    private int m_amount_of_shots;
-    private int m_amount_of_bombs;
+    private int mAmmo;
+    private int mNumberOfBombs;
 
     // knockback variables
     public float mKnockBackSpeed;
@@ -66,17 +66,12 @@ public class Player : MonoBehaviour
         mHealth = MAX_HEALTH;
     }
 
-    private void OnDestroy()
-    {
-        mGameHandler.RemovePlayer(mID);
-    }
-
-    public void Init(GameHandler gh, char ID, int shots, int bombs)
+    public void Init(GameHandler gh, int ID, int shots, int bombs)
     {
         mGameHandler = gh;
         mID = ID;
-        m_amount_of_shots = shots;
-        m_amount_of_bombs = bombs;
+        mAmmo = shots;
+        mNumberOfBombs = bombs;
     }
 
     private IEnumerator DamageFlash(float dt)
@@ -131,6 +126,7 @@ public class Player : MonoBehaviour
         if (mHealth <= 0)
         {
             Instantiate(PREFAB_DEATH_PARTICLES, transform.position, Quaternion.identity);
+            mGameHandler.RemovePlayer(mID);
             Destroy(gameObject);
         }
     }
@@ -166,20 +162,24 @@ public class Player : MonoBehaviour
             Jump();
         }
 
-        if (Input.GetKeyDown(KEY_SHOOT))
+        if (Input.GetKeyDown(KEY_SHOOT) && mAmmo > 0)
         {
             GameObject obj = Instantiate(PREFAB_SNOWBALL, mFirePoint.position, mFirePoint.rotation);
             obj.transform.localScale = transform.localScale;
             mAnimator.SetTrigger("Throw");
+
+            --mAmmo;
+            mGameHandler.SetAmountOfAmmo(mID, mAmmo);
         }
 
-        if (Input.GetKeyDown(KEY_BOMB) && m_amount_of_bombs > 0)
+        if (Input.GetKeyDown(KEY_BOMB) && mNumberOfBombs > 0)
         {
             GameObject obj = Instantiate(PREFAB_BOMB, mFirePoint.position, mFirePoint.rotation);
             obj.transform.localScale = transform.localScale;
             mAnimator.SetTrigger("Throw");
 
-            m_amount_of_bombs--;
+            mNumberOfBombs--;
+            mGameHandler.SetAmountOfBombs(mID, mNumberOfBombs);
         }
     }
 

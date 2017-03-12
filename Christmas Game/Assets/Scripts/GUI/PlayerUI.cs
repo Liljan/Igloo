@@ -46,7 +46,5 @@ public class PlayerUI : MonoBehaviour
     {
         mColor = color;
         mPlayerName.color = color;
-
-        Debug.Log(color);
     }
 }

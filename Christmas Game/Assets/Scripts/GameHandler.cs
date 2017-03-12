@@ -15,12 +15,21 @@ public class GameHandler : MonoBehaviour
 
     // gameplay stats
 
+    // Temporary solution, bad
+    private int[] amountOfLives = { 0, 0, 0, 0 };
+
     // Use this for initialization
     void Start()
     {
+        for (int i = 0; i < playerUI.Length; i++)
+        {
+            playerUI[i].gameObject.SetActive(false);
+        }
+
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++)
         {
             SpawnPlayer(i);
+            amountOfLives[i] = 3;
             InitGUI(i);
         }
     }
@@ -28,16 +37,25 @@ public class GameHandler : MonoBehaviour
     private void SpawnPlayer(int playerIndex)
     {
         GameObject playerObj = Instantiate(PREFAB_PLAYERS[playerIndex], spawnPoints[playerIndex].position, Quaternion.identity);
+        Player player = playerObj.GetComponent<Player>();
+
+        player.Init(this, playerIndex, 20, 6);
     }
 
     private void InitGUI(int playerIndex)
     {
-        playerUI[playerIndex].Initiate(playerNames[playerIndex], 10, 20, 6, playerColors[playerIndex]);
+        playerUI[playerIndex].gameObject.SetActive(true);
+        playerUI[playerIndex].Initiate(playerNames[playerIndex], amountOfLives[playerIndex], 20, 6, playerColors[playerIndex]);
     }
 
-    public void RemoveLife(int playerIndex)
+    public void SetAmountOfBombs(int playerIndex, int n)
     {
+        playerUI[playerIndex].SetBombs(n);
+    }
 
+    public void SetAmountOfAmmo(int playerIndex, int n)
+    {
+        playerUI[playerIndex].SetAmmo(n);
     }
 
     public void RemovePlayer(int playerID)
@@ -45,7 +63,13 @@ public class GameHandler : MonoBehaviour
         // wait some time...
 
         // then...
-        SpawnPlayer(playerID);
+        --amountOfLives[playerID];
+
+        if (amountOfLives[playerID] >= 0)
+            playerUI[playerID].SetLives(amountOfLives[playerID]);
+
+        if (amountOfLives[playerID] > 0)
+            SpawnPlayer(playerID);
     }
 
     // Update is called once per frame

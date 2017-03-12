@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+    private char mID;
+    private GameHandler mGameHandler;
+
     // Prefabs
     [Header("Prefabs")]
     public GameObject PREFAB_SNOWBALL;
@@ -44,7 +47,8 @@ public class Player : MonoBehaviour
     private int mHealth;
 
     [Header("Ammo")]
-    public int m_amount_bombs = 100;
+    private int m_amount_of_shots;
+    private int m_amount_of_bombs;
 
     // knockback variables
     public float mKnockBackSpeed;
@@ -60,6 +64,19 @@ public class Player : MonoBehaviour
 
         mIsGrounded = true;
         mHealth = MAX_HEALTH;
+    }
+
+    private void OnDestroy()
+    {
+        mGameHandler.RemovePlayer(mID);
+    }
+
+    public void Init(GameHandler gh, char ID, int shots, int bombs)
+    {
+        mGameHandler = gh;
+        mID = ID;
+        m_amount_of_shots = shots;
+        m_amount_of_bombs = bombs;
     }
 
     private IEnumerator DamageFlash(float dt)
@@ -156,13 +173,13 @@ public class Player : MonoBehaviour
             mAnimator.SetTrigger("Throw");
         }
 
-        if (Input.GetKeyDown(KEY_BOMB) && m_amount_bombs > 0)
+        if (Input.GetKeyDown(KEY_BOMB) && m_amount_of_bombs > 0)
         {
             GameObject obj = Instantiate(PREFAB_BOMB, mFirePoint.position, mFirePoint.rotation);
             obj.transform.localScale = transform.localScale;
             mAnimator.SetTrigger("Throw");
 
-            m_amount_bombs--;
+            m_amount_of_bombs--;
         }
     }
 

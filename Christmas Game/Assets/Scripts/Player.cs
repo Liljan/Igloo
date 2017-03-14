@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public GameObject PREFAB_SNOWBALL;
     public GameObject PREFAB_BOMB;
 
+    public GameObject PREFAB_TEXT_POPUP;
+
     public GameObject PREFAB_DEATH_PARTICLES;
 
     [Header("Transform Points")]
@@ -130,6 +132,9 @@ public class Player : MonoBehaviour
         StartCoroutine(DamageFlash(0.05f));
 
         Debug.Log("Player " + mID + " took " + dmg + " dmg from Player " + attackerID + " at time " + Time.realtimeSinceStartup);
+        GameObject g = Instantiate(PREFAB_TEXT_POPUP, transform.position + 0.5f * new Vector3(0.0f,0.0f,-0.1f), Quaternion.identity);
+        g.GetComponent<TextMesh>().text = "-" + dmg;
+
 
         if (mHealth <= 0)
         {

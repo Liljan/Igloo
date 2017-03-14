@@ -8,6 +8,7 @@ public class Explosion : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     public int damage = 1;
+    public int ID;
 
     // Use this for initialization
     void Start()
@@ -23,12 +24,8 @@ public class Explosion : MonoBehaviour
         Destroy(this.gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    public void Initiate(int playerID)
     {
-        if (col.collider.CompareTag("Player"))
-        {
-            Player player = col.gameObject.GetComponent<Player>();
-            player.TakeDamage(damage);
-        }
+        ID = playerID;
     }
 }

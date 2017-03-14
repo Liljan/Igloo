@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
         mAnimator.SetBool("Grounded", mIsGrounded);
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(int dmg, int attackerID)
     {
         mHealth -= dmg;
 
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
         if (mHealth <= 0)
         {
             Instantiate(PREFAB_DEATH_PARTICLES, transform.position, Quaternion.identity);
-            mGameHandler.RemovePlayer(mID);
+            mGameHandler.RemovePlayer(mID, attackerID);
             Destroy(gameObject);
         }
     }
@@ -172,6 +172,7 @@ public class Player : MonoBehaviour
         {
             GameObject obj = Instantiate(PREFAB_SNOWBALL, mFirePoint.position, mFirePoint.rotation);
             obj.transform.localScale = transform.localScale;
+            obj.GetComponent<Projectile>().Initiate(mID);
             mAnimator.SetTrigger("Throw");
 
             --mAmmo;
@@ -210,12 +211,22 @@ public class Player : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D other)
     {
-        /*      if (other.gameObject.CompareTag("Enemy"))
-              {
-                  TakeDamage(1);
-                  mIsKnockBackRight = transform.position.x < other.transform.position.x;
-                  EnableKnockBack();
-                  StartCoroutine(DamageFlash(0.5f * mKnockBackTimer));
-              }*/
+        if (other.gameObject.CompareTag("Attack"))
+        {
+            // redo with super class later
+            Projectile p = other.gameObject.GetComponent<Projectile>();
+
+            if (p)
+            {
+                TakeDamage(p.damage, p.ID);
+            }
+
+            Explosion e = other.gameObject.GetComponent<Explosion>();
+
+            if (e)
+            {
+                TakeDamage(e.damage, e.ID);
+            }
+        }
     }
 }

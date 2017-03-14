@@ -58,9 +58,11 @@ public class GameHandler : MonoBehaviour
         playerUI[playerIndex].SetAmmo(n);
     }
 
-    public void RemovePlayer(int playerID)
+    public void RemovePlayer(int playerID, int attackerID)
     {
         // wait some time...
+        if (attackerID >= 0)
+            Debug.Log("Player " + attackerID + " fraged player " + playerID);
 
         // then...
         --amountOfLives[playerID];

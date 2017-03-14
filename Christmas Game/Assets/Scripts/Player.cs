@@ -129,6 +129,8 @@ public class Player : MonoBehaviour
 
         StartCoroutine(DamageFlash(0.05f));
 
+        Debug.Log("Player " + mID + " took " + dmg + " dmg from Player " + attackerID + " at time " + Time.realtimeSinceStartup);
+
         if (mHealth <= 0)
         {
             Instantiate(PREFAB_DEATH_PARTICLES, transform.position, Quaternion.identity);
@@ -183,7 +185,8 @@ public class Player : MonoBehaviour
         {
             GameObject obj = Instantiate(PREFAB_BOMB, mFirePoint.position, mFirePoint.rotation);
             obj.transform.localScale = transform.localScale;
-            mAnimator.SetTrigger("Throw");
+
+            obj.GetComponent<Bomb>().Initiate(mID);
 
             mNumberOfBombs--;
             mGameHandler.SetAmountOfBombs(mID, mNumberOfBombs);
@@ -209,24 +212,8 @@ public class Player : MonoBehaviour
         return mIsGrounded;
     }
 
-    public void OnCollisionEnter2D(Collision2D other)
+    /* public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Attack"))
-        {
-            // redo with super class later
-            Projectile p = other.gameObject.GetComponent<Projectile>();
 
-            if (p)
-            {
-                TakeDamage(p.damage, p.ID);
-            }
-
-            Explosion e = other.gameObject.GetComponent<Explosion>();
-
-            if (e)
-            {
-                TakeDamage(e.damage, e.ID);
-            }
-        }
-    }
+    } */
 }

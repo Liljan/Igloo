@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Explosion : MonoBehaviour
+public class Explosion : Attack
 {
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
-    public int damage = 1;
-    public int ID;
+    public override void HitPlayerEffect()
+    {
+
+    }
 
     // Use this for initialization
     void Start()
@@ -24,8 +24,4 @@ public class Explosion : MonoBehaviour
         Destroy(this.gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 
-    public void Initiate(int playerID)
-    {
-        ID = playerID;
-    }
 }

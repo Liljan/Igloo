@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
-public class Bomb : MonoBehaviour
+public class Bomb : Attack
 {
     public GameObject PREFAB_BOMB;
     public GameObject PREFAB_TEXTMESH;
@@ -42,14 +43,6 @@ public class Bomb : MonoBehaviour
         textMesh.transform.position = transform.position + textOffset;
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.collider.CompareTag("Explosion"))
-        {
-            StartCoroutine(Explode(0.1f));
-        }
-    }
-
     public void Explode()
     {
         StartCoroutine(Explode(0.0f));
@@ -58,7 +51,10 @@ public class Bomb : MonoBehaviour
     public IEnumerator Explode(float time)
     {
         yield return new WaitForSeconds(time);
-        Instantiate(PREFAB_BOMB, transform.position, Quaternion.identity);
+        GameObject g = Instantiate(PREFAB_BOMB, transform.position, Quaternion.identity);
+
+        g.GetComponent<Explosion>().Initiate(playerID);
+
         Destroy(textMesh.gameObject);
         Destroy(this.gameObject);
     }
@@ -70,5 +66,10 @@ public class Bomb : MonoBehaviour
             textMesh.text = Mathf.Floor(timer).ToString();
             yield return new WaitForSeconds(1.0f);
         }
+    }
+
+    public override void HitPlayerEffect()
+    {
+
     }
 }

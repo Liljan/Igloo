@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     private bool mIsGrounded = false;
 
     // health variables
-    public int MAX_HEALTH = 3;
+    public int MAX_HEALTH = 100;
     private int mHealth;
 
     [Header("Ammo")]
@@ -56,11 +56,15 @@ public class Player : MonoBehaviour
     public float MAX_KNOCK_BACK_TIME;
     public float mKnockBackTimer = 0.0f;
 
+    // Temporary
+    private Vector4 oldColor;
+
     public void Awake()
     {
         mRb2d = GetComponent<Rigidbody2D>();
         mAnimator = GetComponent<Animator>();
         mSpriteRenderer = GetComponent<SpriteRenderer>();
+        oldColor = mSpriteRenderer.color;
 
         mIsGrounded = true;
         mHealth = MAX_HEALTH;
@@ -78,7 +82,7 @@ public class Player : MonoBehaviour
     {
         mSpriteRenderer.color = Color.red;
         yield return new WaitForSeconds(dt);
-        mSpriteRenderer.color = Color.white;
+        mSpriteRenderer.color = oldColor;
     }
 
     // Update is called once per frame
@@ -122,6 +126,8 @@ public class Player : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         mHealth -= dmg;
+
+        StartCoroutine(DamageFlash(0.05f));
 
         if (mHealth <= 0)
         {

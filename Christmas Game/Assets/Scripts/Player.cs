@@ -8,11 +8,8 @@ public class Player : MonoBehaviour
 
     // Prefabs
     [Header("Prefabs")]
-    public GameObject PREFAB_SNOWBALL;
     public GameObject PREFAB_BOMB;
-
     public GameObject PREFAB_TEXT_POPUP;
-
     public GameObject PREFAB_DEATH_PARTICLES;
 
     [Header("Transform Points")]
@@ -28,7 +25,6 @@ public class Player : MonoBehaviour
     public KeyCode KEY_LEFT;
     public KeyCode KEY_RIGHT;
     public KeyCode KEY_JUMP;
-    public KeyCode KEY_SHOOT;
     public KeyCode KEY_BOMB;
 
     // components
@@ -51,12 +47,6 @@ public class Player : MonoBehaviour
     [Header("Ammo")]
     private int mAmmo;
     private int mNumberOfBombs;
-
-    // knockback variables
-    public float mKnockBackSpeed;
-    private bool mIsKnockBackRight;
-    public float MAX_KNOCK_BACK_TIME;
-    public float mKnockBackTimer = 0.0f;
 
     // Temporary
     private Vector4 oldColor;
@@ -96,25 +86,7 @@ public class Player : MonoBehaviour
     public void Update()
     {
         Move();
-
-        mKnockBackTimer -= Time.deltaTime;
     }
-
-    private void KnockBack()
-    {
-        if (mIsKnockBackRight)
-        {
-            //mRb2d.velocity = new Vector2(-mKnockBackSpeed, mKnockBackSpeed);
-            mRb2d.velocity = Vector2.left * mKnockBackSpeed;
-        }
-        else
-        {
-            // mRb2d.velocity = new Vector2(mKnockBackSpeed, mKnockBackSpeed);
-            mRb2d.velocity = Vector2.right * mKnockBackSpeed;
-        }
-    }
-
-    public void EnableKnockBack() { mKnockBackTimer = MAX_KNOCK_BACK_TIME; }
 
     private void CheckGrounded()
     {
@@ -152,8 +124,6 @@ public class Player : MonoBehaviour
     private void Move()
     {
         float x = 0.0f;
-        // check keybord input
-        //x = Input.GetAxis("Horizontal");
 
         if (Input.GetKey(KEY_LEFT))
         {
@@ -175,16 +145,12 @@ public class Player : MonoBehaviour
             Jump();
         }
 
+        /*
         if (Input.GetKeyDown(KEY_SHOOT) && mAmmo > 0)
         {
-            GameObject obj = Instantiate(PREFAB_SNOWBALL, mFirePoint.position, mFirePoint.rotation);
-            obj.transform.localScale = transform.localScale;
-            obj.GetComponent<Projectile>().Initiate(mID);
-            mAnimator.SetTrigger("Throw");
-
             --mAmmo;
             mGameHandler.SetAmountOfAmmo(mID, mAmmo);
-        }
+        } */
 
         if (Input.GetKeyDown(KEY_BOMB) && mNumberOfBombs > 0)
         {
@@ -216,9 +182,4 @@ public class Player : MonoBehaviour
     {
         return mIsGrounded;
     }
-
-    /* public void OnCollisionEnter2D(Collision2D other)
-    {
-
-    } */
 }

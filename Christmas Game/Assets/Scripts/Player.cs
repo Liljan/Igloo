@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
     public GameObject PREFAB_TEXT_POPUP;
     public GameObject PREFAB_DEATH_PARTICLES;
 
+    public RangedWeapon weapon;
+
     [Header("Transform Points")]
-    public Transform mFirePoint;
     public Transform mGroundChecker;
     private float mGroundCheckRadius = 0.1f;
 
@@ -22,9 +23,6 @@ public class Player : MonoBehaviour
 
     // Controller Variables
     [Header("Controls")]
-    public KeyCode KEY_LEFT;
-    public KeyCode KEY_RIGHT;
-    public KeyCode KEY_JUMP;
     public KeyCode KEY_BOMB;
 
     // components
@@ -104,7 +102,7 @@ public class Player : MonoBehaviour
         StartCoroutine(DamageFlash(0.05f));
 
         Debug.Log("Player " + mID + " took " + dmg + " dmg from Player " + attackerID + " at time " + Time.realtimeSinceStartup);
-        GameObject g = Instantiate(PREFAB_TEXT_POPUP, transform.position + 0.5f * new Vector3(0.0f,0.0f,-0.1f), Quaternion.identity);
+        GameObject g = Instantiate(PREFAB_TEXT_POPUP, transform.position + 0.5f * new Vector3(0.0f, 0.0f, -0.1f), Quaternion.identity);
         g.GetComponent<TextMesh>().text = "-" + dmg;
 
 
@@ -123,16 +121,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        float x = 0.0f;
-
-        if (Input.GetKey(KEY_LEFT))
-        {
-            x = -1.0f;
-        }
-        else if (Input.GetKey(KEY_RIGHT))
-        {
-            x = 1.0f;
-        }
+        float x = Input.GetAxis("LEFT_STICK_HORIZONTAL");
 
         mRb2d.velocity = new Vector2(mSpeed * x, mRb2d.velocity.y);
 
@@ -140,7 +129,7 @@ public class Player : MonoBehaviour
         // update animation
         mAnimator.SetFloat("Speed", Mathf.Abs(x));
 
-        if (Input.GetKeyDown(KEY_JUMP) && mJumps < MAX_JUMPS - 1)
+        if (Input.GetButtonDown("Jump") && mJumps < MAX_JUMPS - 1)
         {
             Jump();
         }
@@ -154,10 +143,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KEY_BOMB) && mNumberOfBombs > 0)
         {
-            GameObject obj = Instantiate(PREFAB_BOMB, mFirePoint.position, mFirePoint.rotation);
+            /*GameObject obj = Instantiate(PREFAB_BOMB, mFirePoint.position, mFirePoint.rotation);
             obj.transform.localScale = transform.localScale;
 
-            obj.GetComponent<Bomb>().Initiate(mID);
+            obj.GetComponent<Bomb>().Initiate(mID); */
 
             mNumberOfBombs--;
             mGameHandler.SetAmountOfBombs(mID, mNumberOfBombs);
@@ -167,9 +156,13 @@ public class Player : MonoBehaviour
     private void SetFacingDirection(float xAxis)
     {
         if (xAxis <= -0.1f)
+        {
             transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        }
         else if (xAxis >= 0.1f)
+        {
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
     }
 
     public void Jump()
@@ -181,5 +174,10 @@ public class Player : MonoBehaviour
     public bool GetIsGrounded()
     {
         return mIsGrounded;
+    }
+
+    public int GetID()
+    {
+        return mID;
     }
 }

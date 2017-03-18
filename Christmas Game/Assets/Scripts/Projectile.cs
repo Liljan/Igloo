@@ -15,7 +15,8 @@ public class Projectile : Attack
     {
         rb2b = this.gameObject.GetComponent<Rigidbody2D>();
         float angle = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-        Debug.Log(angle);
+        //Debug.Log(angle);
+
         rb2b.velocity = new Vector2(speed * Mathf.Cos(angle), speed * Mathf.Sin(angle));
     }
 

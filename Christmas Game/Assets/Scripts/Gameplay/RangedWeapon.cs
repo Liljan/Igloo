@@ -14,6 +14,9 @@ public class RangedWeapon : MonoBehaviour
 
     float timer = 0.0f;
 
+    private float recoil = 0.0f;
+    public float recoilFactor = 10.0f;
+
     // Use this for initialization
     void Start()
     {
@@ -23,7 +26,6 @@ public class RangedWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         // Compensate the input for player turning, i.e. flipping in the x-direction.
         float x = Input.GetAxis("RIGHT_STICK_HORIZONTAL") * transform.parent.localScale.x;
         float y = Input.GetAxis("RIGHT_STICK_VERTICAL") * transform.parent.localScale.x;
@@ -43,27 +45,40 @@ public class RangedWeapon : MonoBehaviour
 
         if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f)
         {
-            Vector3 parentLocalScale = transform.parent.localScale;
-
-            Vector3 localRot = transform.localEulerAngles;
-
-            // If flipped to the left - flip x-wise
-            if (parentLocalScale.x < 0.0f)
-            {
-                localRot.z *= parentLocalScale.x;
-                localRot.z += 180.0f;
-            }
-
-            Quaternion spawnRot = Quaternion.Euler(localRot);
-
-            GameObject obj = Instantiate(BULLET, FIRE_POINT.position, spawnRot);
-            obj.GetComponent<Attack>().Initiate(0);
-
-            timer = 0.2f;
+            Shoot();
         }
 
         timer -= Time.deltaTime;
+        recoil -= Time.deltaTime;
+        recoil = Mathf.Max(0.0f, recoil);
 
+       // Debug.Log(recoil);
+    }
 
+    private void Shoot()
+    {
+        Vector3 parentLocalScale = transform.parent.localScale;
+
+        Vector3 localRot = transform.localEulerAngles;
+
+        // If flipped to the left - flip x-wise
+        if (parentLocalScale.x < 0.0f)
+        {
+            localRot.z *= parentLocalScale.x;
+            localRot.z += 180.0f;
+        }
+
+        recoil += recoilFactor;
+
+        float recoilDisplacement = Random.Range(-recoil, recoil);
+        Debug.Log(recoilDisplacement);
+        localRot.z += recoilDisplacement;
+
+        Quaternion spawnRot = Quaternion.Euler(localRot);
+
+        GameObject obj = Instantiate(BULLET, FIRE_POINT.position, spawnRot);
+        obj.GetComponent<Attack>().Initiate(0);
+
+        timer = 0.2f;
     }
 }

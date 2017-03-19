@@ -17,16 +17,12 @@ public class Projectile : Attack
 
         float angle = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
 
-        Debug.Log("Global rotation angle: " + transform.rotation.eulerAngles.z);
-        //Debug.Log()
-
         rb2b.velocity = new Vector2(speed * Mathf.Cos(angle), speed * Mathf.Sin(angle));
     }
 
     public override void HitPlayerEffect()
     {
         GameObject obj = Instantiate(PREFAB_PARTICLES, transform.position, transform.rotation);
-        //obj.transform.localScale = transform.localScale;
         Destroy(this.gameObject);
     }
 }

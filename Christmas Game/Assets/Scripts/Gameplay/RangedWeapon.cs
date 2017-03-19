@@ -23,8 +23,10 @@ public class RangedWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("RIGHT_STICK_HORIZONTAL");
-        float y = Input.GetAxis("RIGHT_STICK_VERTICAL");
+
+        // Compensate the input for player turning, i.e. flipping in the x-direction.
+        float x = Input.GetAxis("RIGHT_STICK_HORIZONTAL") * transform.parent.localScale.x;
+        float y = Input.GetAxis("RIGHT_STICK_VERTICAL") * transform.parent.localScale.x;
 
         float aimAngle = 0.0f;
 
@@ -42,13 +44,12 @@ public class RangedWeapon : MonoBehaviour
         if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f)
         {
             Vector3 parentLocalScale = transform.parent.localScale;
-            Debug.Log("Parent local scale: " + parentLocalScale);
 
             Vector3 localRot = transform.localEulerAngles;
 
+            // If flipped to the left - flip x-wise
             if (parentLocalScale.x < 0.0f)
             {
-                Debug.Log("Local rotation: " + localRot);
                 localRot.z *= parentLocalScale.x;
                 localRot.z += 180.0f;
             }
@@ -56,10 +57,7 @@ public class RangedWeapon : MonoBehaviour
             Quaternion spawnRot = Quaternion.Euler(localRot);
 
             GameObject obj = Instantiate(BULLET, FIRE_POINT.position, spawnRot);
-
-            Projectile bullet = obj.GetComponent<Projectile>();
-            bullet.Initiate(0);// instantiate with ID 0
-
+            obj.GetComponent<Attack>().Initiate(0);
 
             timer = 0.2f;
         }

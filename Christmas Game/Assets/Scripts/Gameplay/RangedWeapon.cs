@@ -17,10 +17,17 @@ public class RangedWeapon : MonoBehaviour
     private float recoil = 0.0f;
     public float recoilFactor = 10.0f;
 
+    public int ammo = 20;
+    public int clipSize = 8;
+    private int ammoInClip;
+    private bool isReloading = false;
+
+
     // Use this for initialization
     void Start()
     {
         WEAPON_SPRITE_RENDERER.sprite = sprite;
+        ammoInClip = clipSize;
     }
 
     // Update is called once per frame
@@ -43,16 +50,21 @@ public class RangedWeapon : MonoBehaviour
             this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, aimAngle);
         }
 
-        if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f)
+        if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
         {
+            Debug.Log("Ammo in magazine: " + ammoInClip);
             Shoot();
+        }
+        else if (Input.GetButton("RELOAD") && !isReloading)
+        {
+            StartCoroutine(Reload(0.3f));
         }
 
         timer -= Time.deltaTime;
         recoil -= Time.deltaTime;
         recoil = Mathf.Max(0.0f, recoil);
 
-       // Debug.Log(recoil);
+        // Debug.Log(recoil);
     }
 
     private void Shoot()
@@ -71,7 +83,6 @@ public class RangedWeapon : MonoBehaviour
         recoil += recoilFactor;
 
         float recoilDisplacement = Random.Range(-recoil, recoil);
-        Debug.Log(recoilDisplacement);
         localRot.z += recoilDisplacement;
 
         Quaternion spawnRot = Quaternion.Euler(localRot);
@@ -80,5 +91,30 @@ public class RangedWeapon : MonoBehaviour
         obj.GetComponent<Attack>().Initiate(0);
 
         timer = 0.2f;
+        ammoInClip--;
+    }
+
+    private IEnumerator Reload(float dt)
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(dt);
+
+        ammo += ammoInClip;
+
+        if (ammo >= clipSize)
+        {
+            ammo -= clipSize;
+            ammoInClip = clipSize;
+        }
+        else
+        {
+            ammoInClip = ammo;
+            ammo = 0;
+        }
+
+        Debug.Log("Reload, ammo in clip: " + ammoInClip);
+        Debug.Log("Reload, total ammo: " + ammo);
+
+        isReloading = false;
     }
 }

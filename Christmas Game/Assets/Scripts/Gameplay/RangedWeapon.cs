@@ -22,12 +22,20 @@ public class RangedWeapon : MonoBehaviour
     private int ammoInClip;
     private bool isReloading = false;
 
+    public float reloadTime = 0.5f;
+
+    // SOUND EFFECTS
+    private AudioSource audioSource;
+    public AudioClip SFX_SHOOT;
+    public AudioClip SFX_RELOAD;
 
     // Use this for initialization
     void Start()
     {
         WEAPON_SPRITE_RENDERER.sprite = sprite;
         ammoInClip = clipSize;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -52,19 +60,17 @@ public class RangedWeapon : MonoBehaviour
 
         if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
         {
-            Debug.Log("Ammo in magazine: " + ammoInClip);
             Shoot();
+            Debug.Log("Ammo in magazine: " + ammoInClip);
         }
         else if (Input.GetButton("RELOAD") && !isReloading)
         {
-            StartCoroutine(Reload(0.3f));
+            StartCoroutine(Reload(reloadTime));
         }
 
         timer -= Time.deltaTime;
         recoil -= Time.deltaTime;
         recoil = Mathf.Max(0.0f, recoil);
-
-        // Debug.Log(recoil);
     }
 
     private void Shoot()
@@ -90,6 +96,8 @@ public class RangedWeapon : MonoBehaviour
         GameObject obj = Instantiate(BULLET, FIRE_POINT.position, spawnRot);
         obj.GetComponent<Attack>().Initiate(0);
 
+        audioSource.PlayOneShot(SFX_SHOOT);
+
         timer = 0.2f;
         ammoInClip--;
     }
@@ -97,6 +105,7 @@ public class RangedWeapon : MonoBehaviour
     private IEnumerator Reload(float dt)
     {
         isReloading = true;
+        audioSource.PlayOneShot(SFX_RELOAD);
         yield return new WaitForSeconds(dt);
 
         ammo += ammoInClip;

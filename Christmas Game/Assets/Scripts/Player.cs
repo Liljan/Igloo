@@ -49,12 +49,22 @@ public class Player : MonoBehaviour
     // Temporary
     private Vector4 oldColor;
 
+    // SOUND EFFECTS
+    private AudioSource audioSource;
+    public AudioClip SFX_JUMP;
+    public AudioClip SFX_DOUBLE_JUMP;
+    public AudioClip SFX_TAUNT;
+    public AudioClip SFX_HURT;
+    public AudioClip SFX_DEATH;
+
     public void Awake()
     {
         mRb2d = GetComponent<Rigidbody2D>();
         mAnimator = GetComponent<Animator>();
         mSpriteRenderer = GetComponent<SpriteRenderer>();
         oldColor = mSpriteRenderer.color;
+
+        audioSource = GetComponent<AudioSource>();
 
         mIsGrounded = true;
         mHealth = MAX_HEALTH;
@@ -110,6 +120,8 @@ public class Player : MonoBehaviour
         {
             Instantiate(PREFAB_DEATH_PARTICLES, transform.position, Quaternion.identity);
             mGameHandler.RemovePlayer(mID, attackerID);
+
+            audioSource.PlayOneShot(SFX_DEATH);
             Destroy(gameObject);
         }
     }
@@ -151,6 +163,12 @@ public class Player : MonoBehaviour
             mNumberOfBombs--;
             mGameHandler.SetAmountOfBombs(mID, mNumberOfBombs);
         }
+
+        if (Input.GetButtonDown("TAUNT"))
+        {
+            mAnimator.SetTrigger("Taunt");
+            audioSource.PlayOneShot(SFX_DEATH);
+        }
     }
 
     private void SetFacingDirection(float xAxis)
@@ -168,7 +186,16 @@ public class Player : MonoBehaviour
     public void Jump()
     {
         mRb2d.velocity = new Vector2(mRb2d.velocity.x, mJumpForce);
-        ++mJumps;
+        mJumps++;
+
+        if (mJumps == 1)
+        {
+            audioSource.PlayOneShot(SFX_JUMP);
+        }
+        else if(mJumps == 2)
+        {
+            audioSource.PlayOneShot(SFX_DOUBLE_JUMP);
+        }
     }
 
     public bool GetIsGrounded()

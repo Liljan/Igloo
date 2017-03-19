@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: badc945af1e7ecc4088cc1f57f0446c6
-timeCreated: 1489844871
+timeCreated: 1489951948
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -41,6 +41,14 @@ TextureImporter:
     21300068: New Player Sheet_34
     21300070: New Player Sheet_35
     21300072: New Player Sheet_36
+    21300074: New Player Sheet_37
+    21300076: New Player Sheet_38
+    21300078: New Player Sheet_39
+    21300080: New Player Sheet_40
+    21300082: New Player Sheet_41
+    21300084: New Player Sheet_42
+    21300086: New Player Sheet_43
+    21300088: New Player Sheet_44
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -508,7 +516,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -555,6 +563,110 @@ TextureImporter:
       name: New Player Sheet_33
       rect:
         serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: New Player Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: New Player Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: New Player Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: New Player Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: New Player Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: New Player Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: New Player Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: New Player Sheet_41
+      rect:
+        serializedVersion: 2
         x: 96
         y: 0
         width: 16
@@ -565,7 +677,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: New Player Sheet_34
+      name: New Player Sheet_42
       rect:
         serializedVersion: 2
         x: 112
@@ -578,7 +690,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: New Player Sheet_35
+      name: New Player Sheet_43
       rect:
         serializedVersion: 2
         x: 128
@@ -591,7 +703,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: New Player Sheet_36
+      name: New Player Sheet_44
       rect:
         serializedVersion: 2
         x: 144

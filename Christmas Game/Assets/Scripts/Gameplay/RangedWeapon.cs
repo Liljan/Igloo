@@ -41,8 +41,25 @@ public class RangedWeapon : MonoBehaviour
 
         if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f)
         {
-            GameObject obj = Instantiate(BULLET, FIRE_POINT.position, transform.rotation);
-            obj.GetComponent<Projectile>().Initiate(0); // instantiate with ID 0
+            Vector3 parentLocalScale = transform.parent.localScale;
+            Debug.Log("Parent local scale: " + parentLocalScale);
+
+            Vector3 localRot = transform.localEulerAngles;
+
+            if (parentLocalScale.x < 0.0f)
+            {
+                Debug.Log("Local rotation: " + localRot);
+                localRot.z *= parentLocalScale.x;
+                localRot.z += 180.0f;
+            }
+
+            Quaternion spawnRot = Quaternion.Euler(localRot);
+
+            GameObject obj = Instantiate(BULLET, FIRE_POINT.position, spawnRot);
+
+            Projectile bullet = obj.GetComponent<Projectile>();
+            bullet.Initiate(0);// instantiate with ID 0
+
 
             timer = 0.2f;
         }

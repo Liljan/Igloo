@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
         // update animation
         mAnimator.SetFloat("Speed", Mathf.Abs(x));
 
-        if (Input.GetButtonDown("Jump") && mJumps < MAX_JUMPS - 1)
+        if (Input.GetButtonDown("JUMP") && mJumps < MAX_JUMPS - 1)
         {
             Jump();
         }

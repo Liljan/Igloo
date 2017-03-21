@@ -24,6 +24,9 @@ public class RangedWeapon : MonoBehaviour
 
     public float reloadTime = 0.5f;
 
+    // Bars
+    public FillBar reloadBar;
+
     // SOUND EFFECTS
     private AudioSource audioSource;
     public AudioClip SFX_SHOOT;

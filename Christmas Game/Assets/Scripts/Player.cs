@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
         mNumberOfBombs = bombs;
 
         reloadBar.gameObject.SetActive(false);
+
     }
 
     private IEnumerator DamageFlash(float dt)

@@ -76,9 +76,6 @@ public class Player : MonoBehaviour
         mID = ID;
         mAmmo = shots;
         mNumberOfBombs = bombs;
-
-        reloadBar.gameObject.SetActive(false);
-
     }
 
     private IEnumerator DamageFlash(float dt)
@@ -195,7 +192,7 @@ public class Player : MonoBehaviour
         {
             audioSource.PlayOneShot(SFX_JUMP);
         }
-        else if(mJumps == 2)
+        else if (mJumps == 2)
         {
             audioSource.PlayOneShot(SFX_DOUBLE_JUMP);
         }

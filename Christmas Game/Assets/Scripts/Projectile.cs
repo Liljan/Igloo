@@ -16,13 +16,12 @@ public class Projectile : Attack
         rb2b = this.gameObject.GetComponent<Rigidbody2D>();
 
         float angle = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-
         rb2b.velocity = new Vector2(speed * Mathf.Cos(angle), speed * Mathf.Sin(angle));
     }
 
     public override void HitPlayerEffect()
-    {
-        GameObject obj = Instantiate(PREFAB_PARTICLES, transform.position, transform.rotation);
+    {   
+		GameObject obj = Instantiate(PREFAB_PARTICLES, transform.position, transform.rotation);
         Destroy(this.gameObject);
     }
 }

@@ -44,22 +44,22 @@ public class RangedWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Compensate the input for player turning, i.e. flipping in the x-direction.
-        float x = Input.GetAxis("RIGHT_STICK_HORIZONTAL") * transform.parent.localScale.x;
-        float y = Input.GetAxis("RIGHT_STICK_VERTICAL") * transform.parent.localScale.x;
+        /* // Compensate the input for player turning, i.e. flipping in the x-direction.
+         float x = Input.GetAxis("RIGHT_STICK_HORIZONTAL") * transform.parent.localScale.x;
+         float y = Input.GetAxis("RIGHT_STICK_VERTICAL") * transform.parent.localScale.x;
 
-        float aimAngle = 0.0f;
+         float aimAngle = 0.0f;
 
-        if (Mathf.Abs(x) < AIM_THRESHOLD)
-            x = 0.0f;
-        if (Mathf.Abs(y) < AIM_THRESHOLD)
-            y = 0.0f;
+         if (Mathf.Abs(x) < AIM_THRESHOLD)
+             x = 0.0f;
+         if (Mathf.Abs(y) < AIM_THRESHOLD)
+             y = 0.0f;
 
-        if (x != 0.0f || y != 0.0f)
-        {
-            aimAngle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
-            this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, aimAngle);
-        }
+         if (x != 0.0f || y != 0.0f)
+         {
+             aimAngle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+             this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, aimAngle);
+         } */
 
         if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
         {
@@ -78,14 +78,13 @@ public class RangedWeapon : MonoBehaviour
 
     private void Shoot()
     {
-        Vector3 parentLocalScale = transform.parent.localScale;
-
-        Vector3 localRot = transform.localEulerAngles;
+		Vector3 playerLocalScale = transform.parent.transform.parent.localScale;
+        Vector3 localRot = transform.parent.localEulerAngles;
 
         // If flipped to the left - flip x-wise
-        if (parentLocalScale.x < 0.0f)
+        if (playerLocalScale.x < 0.0f)
         {
-            localRot.z *= parentLocalScale.x;
+            localRot.z *= playerLocalScale.x;
             localRot.z += 180.0f;
         }
 

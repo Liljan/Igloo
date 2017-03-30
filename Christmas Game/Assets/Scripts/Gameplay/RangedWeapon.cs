@@ -23,6 +23,10 @@ public class RangedWeapon : MonoBehaviour
 
     public float reloadTime = 0.5f;
 
+	// Shell casings
+	public bool shouldDropShells = true;
+	public GameObject SHELL;
+
     // Bars
     public FillBar reloadBar;
 
@@ -94,6 +98,9 @@ public class RangedWeapon : MonoBehaviour
         obj.GetComponent<Attack>().Initiate(0);
 
 		StartCoroutine (ShowMuzzleFlash (0.05f));
+
+		if(shouldDropShells)
+			Instantiate (SHELL, transform.position, transform.rotation);
 
         audioSource.PlayOneShot(SFX_SHOOT);
 

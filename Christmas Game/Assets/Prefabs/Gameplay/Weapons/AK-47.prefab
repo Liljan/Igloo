@@ -230,6 +230,8 @@ MonoBehaviour:
   ammo: 90
   clipSize: 32
   reloadTime: 0.5
+  dropShells: 1
+  SHELL: {fileID: 1452769728595112, guid: e360d803ca03f364989b432f4ca2b224, type: 2}
   reloadBar: {fileID: 0}
   SFX_SHOOT: {fileID: 8300000, guid: 326bf4cb8d8d1a4449dac9cbd47b89b8, type: 3}
   SFX_RELOAD: {fileID: 8300000, guid: 7603bdc662325654996c6e98e0e6eb56, type: 3}

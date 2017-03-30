@@ -1,11 +1,13 @@
 fileFormatVersion: 2
 guid: 0d89931959785594b963f415fa0628bd
-timeCreated: 1489927367
+timeCreated: 1490907801
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Various Assets_0
     21300002: Various Assets_1
+    21300004: Various Assets_2
+    21300006: Various Assets_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -96,7 +98,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -109,7 +111,33 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Various Assets_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 112
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.49703193, y: 0.5281968}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Various Assets_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 112
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5281968}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

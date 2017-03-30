@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class RangedWeapon : MonoBehaviour
 {
-    public Sprite sprite;
-    public SpriteRenderer WEAPON_SPRITE_RENDERER;
     public Transform FIRE_POINT;
 
     public GameObject BULLET;
@@ -35,7 +33,6 @@ public class RangedWeapon : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        WEAPON_SPRITE_RENDERER.sprite = sprite;
         ammoInClip = clipSize;
 
         audioSource = GetComponent<AudioSource>();
@@ -45,9 +42,6 @@ public class RangedWeapon : MonoBehaviour
     void Update()
     {
         /* // Compensate the input for player turning, i.e. flipping in the x-direction.
-         float x = Input.GetAxis("RIGHT_STICK_HORIZONTAL") * transform.parent.localScale.x;
-         float y = Input.GetAxis("RIGHT_STICK_VERTICAL") * transform.parent.localScale.x;
-
          float aimAngle = 0.0f;
 
          if (Mathf.Abs(x) < AIM_THRESHOLD)
@@ -69,7 +63,7 @@ public class RangedWeapon : MonoBehaviour
         else if (Input.GetButton("RELOAD") && !isReloading)
         {
             StartCoroutine(Reload(reloadTime));
-        }
+		}
 
         timer -= Time.deltaTime;
         recoil -= Time.deltaTime;

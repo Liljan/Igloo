@@ -5,6 +5,7 @@ using UnityEngine;
 public class RangedWeapon : MonoBehaviour
 {
     public Transform FIRE_POINT;
+	public SpriteRenderer muzzleFlashRenderer;
 
     public GameObject BULLET;
 
@@ -92,6 +93,8 @@ public class RangedWeapon : MonoBehaviour
         GameObject obj = Instantiate(BULLET, FIRE_POINT.position, spawnRot);
         obj.GetComponent<Attack>().Initiate(0);
 
+		StartCoroutine (ShowMuzzleFlash (0.05f));
+
         audioSource.PlayOneShot(SFX_SHOOT);
 
         timer = 0.2f;
@@ -122,4 +125,20 @@ public class RangedWeapon : MonoBehaviour
 
         isReloading = false;
     }
+
+	private IEnumerator ShowMuzzleFlash(float dt)
+	{
+		muzzleFlashRenderer.gameObject.SetActive(true);
+
+		if (Random.value > 0.5) {
+			muzzleFlashRenderer.flipY = true;
+		}
+		else
+		{
+			muzzleFlashRenderer.flipY = false;
+		}
+
+		yield return new WaitForSeconds(dt);
+		muzzleFlashRenderer.gameObject.SetActive(false);
+	}
 }

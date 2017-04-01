@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9fbab6eac11aedd41b84b7376e63675c
-timeCreated: 1488704394
+guid: 3227621cf6a4f92469716610cc359479
+timeCreated: 1491042409
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,13 +9,13 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: VCR OSD Mono
+  fontName: Pixel Emulator
   fontNames:
-  - VCR OSD Mono
+  - Pixel Emulator
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
-  ascentCalculationMode: 2
+  ascentCalculationMode: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

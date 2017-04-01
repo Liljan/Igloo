@@ -109,10 +109,10 @@ public class Weapons : MonoBehaviour
 		bool found = false;
 
 		for (int i = 0; i < weapons.Count; i++) {
-			currentWeapon = weapons [i].GetComponent<RangedWeapon>();
+			currentWeapon = weapons[i].GetComponent<RangedWeapon>();
 
 			if (currentWeapon.weaponID == newWeaponID) {
-				Debug.Log ("The same!");
+				currentWeapon.AddAmmo (2 * currentWeapon.clipSize);
 				found = true;
 			}
 		}

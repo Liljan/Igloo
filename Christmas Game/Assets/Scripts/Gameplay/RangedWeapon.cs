@@ -150,4 +150,8 @@ public class RangedWeapon : MonoBehaviour
 		yield return new WaitForSeconds(dt);
 		muzzleFlashRenderer.gameObject.SetActive(false);
 	}
+
+	public void AddAmmo(int a) {
+		ammo += a;
+	}
 }

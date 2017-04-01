@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 23763211}
   - component: {fileID: 23763212}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,7 +279,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300084, guid: badc945af1e7ecc4088cc1f57f0446c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4842,6 +4842,8 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 1151771563809622, guid: fe2f2f90275d1b44089b4f17892b4d29,
     type: 2}
   MAX_COOLDOWN_TIME: 3
+  icon: {fileID: 23763209}
+  particles: {fileID: 1663201072}
 --- !u!1 &888741476
 GameObject:
   m_ObjectHideFlags: 0
@@ -7118,7 +7120,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -103968755
+  randomSeed: 1462196296
   InitialModule:
     serializedVersion: 3
     enabled: 1

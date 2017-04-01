@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212275002256645734}
   - component: {fileID: 50738974008638704}
   - component: {fileID: 70561496510734404}
+  - component: {fileID: 114815850797790910}
   m_Layer: 0
   m_Name: Pistol Shell
   m_TagString: Untagged
@@ -74,8 +75,20 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.15, y: 0.09}
+  m_Size: {x: 0.03, y: 0.07}
   m_Direction: 1
+--- !u!114 &114815850797790910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1334723482736558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e1ef0dbeab71843a9d71100de006bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 3
 --- !u!212 &212275002256645734
 SpriteRenderer:
   m_ObjectHideFlags: 1

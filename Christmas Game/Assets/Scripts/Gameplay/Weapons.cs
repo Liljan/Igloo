@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Weapons : MonoBehaviour
 {
-	public GameObject[] weapons;
+	public List<GameObject> startingWeapons;
+	private List<GameObject> weapons = new List<GameObject>();
 	private int activeWeapon = 0;
     public float AIM_THRESHOLD = 0.2f;
 
@@ -13,7 +14,15 @@ public class Weapons : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		weapons[activeWeapon].SetActive(true);
+		
+		GameObject go;
+		for (int i = 0; i < startingWeapons.Count; i++) {
+			weapons.Add(Instantiate(startingWeapons[i], transform.position, transform.rotation,this.transform));
+
+		}
+		weapons[0].SetActive(true);
+
+		//Debug.Log(weapons.Count);
     }
 
     // Update is called once per frame
@@ -65,7 +74,7 @@ public class Weapons : MonoBehaviour
 
 		weapons[activeWeapon].SetActive(false);
 
-		if (activeWeapon < weapons.Length - 1) {
+		if (activeWeapon < weapons.Count - 1) {
 			activeWeapon++;
 		} else {
 			activeWeapon = 0;
@@ -85,9 +94,31 @@ public class Weapons : MonoBehaviour
 		if (activeWeapon > 0) {
 			activeWeapon--;
 		} else {
-			activeWeapon = weapons.Length - 1;
+			activeWeapon = weapons.Count - 1;
 		}
 
 		weapons[activeWeapon].SetActive(true);
+	}
+
+	public void AddWeapon(GameObject newWeapon) {
+
+		WeaponID newWeaponID = newWeapon.GetComponent<RangedWeapon>().weaponID;
+
+		RangedWeapon currentWeapon;
+
+		bool found = false;
+
+		for (int i = 0; i < weapons.Count; i++) {
+			currentWeapon = weapons [i].GetComponent<RangedWeapon>();
+
+			if (currentWeapon.weaponID == newWeaponID) {
+				Debug.Log ("The same!");
+				found = true;
+			}
+		}
+
+		if (!found) {
+			weapons.Add(Instantiate (newWeapon, transform.position, transform.rotation,this.transform));
+		}
 	}
 }

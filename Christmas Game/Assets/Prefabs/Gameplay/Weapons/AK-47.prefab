@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63c408af51c3e5429e18f1c33fa075f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponID: 2
   FIRE_POINT: {fileID: 4234467169057098}
   muzzleFlashRenderer: {fileID: 212663819022963214}
   BULLET: {fileID: 1378952666985686, guid: bfe07f63a69318842b4bfd643dc00e89, type: 2}
@@ -230,7 +231,7 @@ MonoBehaviour:
   ammo: 90
   clipSize: 32
   reloadTime: 0.5
-  dropShells: 1
+  shouldDropShells: 1
   SHELL: {fileID: 1452769728595112, guid: e360d803ca03f364989b432f4ca2b224, type: 2}
   reloadBar: {fileID: 0}
   SFX_SHOOT: {fileID: 8300000, guid: 326bf4cb8d8d1a4449dac9cbd47b89b8, type: 3}

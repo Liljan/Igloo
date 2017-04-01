@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RangedWeapon : MonoBehaviour
 {
+	public WeaponID weaponID;
+
     public Transform FIRE_POINT;
 	public SpriteRenderer muzzleFlashRenderer;
 

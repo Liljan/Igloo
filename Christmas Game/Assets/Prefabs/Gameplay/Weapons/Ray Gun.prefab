@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63c408af51c3e5429e18f1c33fa075f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponID: 3
   FIRE_POINT: {fileID: 4658711818773472}
   muzzleFlashRenderer: {fileID: 212100310855695114}
   BULLET: {fileID: 1378952666985686, guid: bfe07f63a69318842b4bfd643dc00e89, type: 2}

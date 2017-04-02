@@ -10,6 +10,7 @@ public class RangedWeapon : MonoBehaviour
 	public SpriteRenderer muzzleFlashRenderer;
 
     public GameObject BULLET;
+	public int damage;
 
     public float AIM_THRESHOLD = 0.2f;
 
@@ -18,6 +19,7 @@ public class RangedWeapon : MonoBehaviour
     private float recoil = 0.0f;
     public float recoilFactor = 10.0f;
 
+	[Header("Ammo")]
     public int ammo = 20;
     public int clipSize = 8;
     private int ammoInClip;
@@ -26,6 +28,7 @@ public class RangedWeapon : MonoBehaviour
     public float reloadTime = 0.5f;
 
 	// Shell casings
+	[Header("Shell casings")]
 	public bool shouldDropShells = true;
 	public GameObject SHELL;
 
@@ -33,6 +36,7 @@ public class RangedWeapon : MonoBehaviour
     public FillBar reloadBar;
 
     // SOUND EFFECTS
+	[Header("Sound Effects")]
     private AudioSource audioSource;
     public AudioClip SFX_SHOOT;
     public AudioClip SFX_RELOAD;
@@ -48,19 +52,6 @@ public class RangedWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /* // Compensate the input for player turning, i.e. flipping in the x-direction.
-         float aimAngle = 0.0f;
-
-         if (Mathf.Abs(x) < AIM_THRESHOLD)
-             x = 0.0f;
-         if (Mathf.Abs(y) < AIM_THRESHOLD)
-             y = 0.0f;
-
-         if (x != 0.0f || y != 0.0f)
-         {
-             aimAngle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
-             this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, aimAngle);
-         } */
 
         if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
         {
@@ -97,12 +88,13 @@ public class RangedWeapon : MonoBehaviour
         Quaternion spawnRot = Quaternion.Euler(localRot);
 
         GameObject obj = Instantiate(BULLET, FIRE_POINT.position, spawnRot);
-        obj.GetComponent<Attack>().Initiate(0);
+		obj.GetComponent<Attack>().Initiate(0,damage);
 
-		StartCoroutine (ShowMuzzleFlash (0.05f));
+
+		StartCoroutine(ShowMuzzleFlash(0.05f));
 
 		if(shouldDropShells)
-			Instantiate (SHELL, transform.position, transform.rotation);
+			Instantiate(SHELL, transform.position, transform.rotation);
 
         audioSource.PlayOneShot(SFX_SHOOT);
 

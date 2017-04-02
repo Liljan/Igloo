@@ -225,7 +225,8 @@ MonoBehaviour:
   weaponID: 2
   FIRE_POINT: {fileID: 4234467169057098}
   muzzleFlashRenderer: {fileID: 212663819022963214}
-  BULLET: {fileID: 1378952666985686, guid: bfe07f63a69318842b4bfd643dc00e89, type: 2}
+  BULLET: {fileID: 1378952666985686, guid: 839b5a5996dff0b43bd267ad81b7aa35, type: 2}
+  damage: 2
   AIM_THRESHOLD: 0.2
   recoilFactor: 0.3
   ammo: 90

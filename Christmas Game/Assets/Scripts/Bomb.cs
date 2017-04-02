@@ -53,7 +53,7 @@ public class Bomb : Attack
         yield return new WaitForSeconds(time);
         GameObject g = Instantiate(PREFAB_BOMB, transform.position, Quaternion.identity);
 
-        g.GetComponent<Explosion>().Initiate(playerID);
+		g.GetComponent<Explosion>().Initiate(playerID, damage);
 
         Destroy(textMesh.gameObject);
         Destroy(this.gameObject);

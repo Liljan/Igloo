@@ -7,9 +7,10 @@ public abstract class Attack : MonoBehaviour
     public int damage;
     public int playerID;
 
-    public void Initiate(int ID)
+	public void Initiate(int ID, int dmg)
     {
         playerID = ID;
+		damage = dmg;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

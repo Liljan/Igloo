@@ -3776,10 +3776,10 @@ MonoBehaviour:
     type: 2}
   weapon: {fileID: 0}
   mGroundChecker: {fileID: 413407923}
+  throwPoint: {fileID: 965061776}
   mWhatIsGround:
     serializedVersion: 2
     m_Bits: 3584
-  KEY_BOMB: 120
   mSpeed: 5
   MAX_JUMPS: 2
   mJumpForce: 5

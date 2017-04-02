@@ -16,14 +16,11 @@ public class Player : MonoBehaviour
 
     [Header("Transform Points")]
     public Transform mGroundChecker;
+	public Transform throwPoint;
     private float mGroundCheckRadius = 0.1f;
 
     [Header("Collision")]
     public LayerMask mWhatIsGround;
-
-    // Controller Variables
-    [Header("Controls")]
-    public KeyCode KEY_BOMB;
 
     // components
     private Rigidbody2D mRb2d;
@@ -44,7 +41,7 @@ public class Player : MonoBehaviour
 
     [Header("Ammo")]
     private int mAmmo;
-    private int mNumberOfBombs;
+    private int mNumberOfBombs = 3;
 
     // Temporary
     private Vector4 oldColor;
@@ -146,22 +143,15 @@ public class Player : MonoBehaviour
             Jump();
         }
 
-        /*
-        if (Input.GetKeyDown(KEY_SHOOT) && mAmmo > 0)
+		if (Input.GetButtonDown("THROW_GRENADE") && mNumberOfBombs > 0)
         {
-            --mAmmo;
-            mGameHandler.SetAmountOfAmmo(mID, mAmmo);
-        } */
-
-        if (Input.GetKeyDown(KEY_BOMB) && mNumberOfBombs > 0)
-        {
-            /*GameObject obj = Instantiate(PREFAB_BOMB, mFirePoint.position, mFirePoint.rotation);
+			GameObject obj = Instantiate(PREFAB_BOMB, throwPoint.position, throwPoint.rotation);
             obj.transform.localScale = transform.localScale;
 
-            obj.GetComponent<Bomb>().Initiate(mID); */
+            obj.GetComponent<Bomb>().Initiate(mID,1);
 
             mNumberOfBombs--;
-            mGameHandler.SetAmountOfBombs(mID, mNumberOfBombs);
+            //mGameHandler.SetAmountOfBombs(mID, mNumberOfBombs);
         }
 
         if (Input.GetButtonDown("TAUNT"))

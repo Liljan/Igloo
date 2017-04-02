@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    private int mID;
-    private GameHandler mGameHandler;
+	private int ID;
+    private GameHandler gameHandler;
 
     // Prefabs
     [Header("Prefabs")]
@@ -12,42 +12,40 @@ public class Player : MonoBehaviour
     public GameObject PREFAB_TEXT_POPUP;
     public GameObject PREFAB_DEATH_PARTICLES;
 
-    public RangedWeapon weapon;
-
     [Header("Transform Points")]
-    public Transform mGroundChecker;
+    public Transform groundCheckPoint;
 	public Transform throwPoint;
-    private float mGroundCheckRadius = 0.1f;
+	private float groundCheckRadius = 0.1f;
 
     [Header("Collision")]
-    public LayerMask mWhatIsGround;
+    public LayerMask groundLayer;
 
     // components
-    private Rigidbody2D mRb2d;
-    private Animator mAnimator;
-    private SpriteRenderer mSpriteRenderer;
+    private Rigidbody2D rb2d;
+	private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     // movement variables
     [Header("Gameplay Variables")]
-    public float mSpeed = 1.0f;
+    public float runningSpeed = 1.0f;
     public int MAX_JUMPS = 2;
-    public float mJumpForce;
-    private int mJumps = 0;
-    private bool mIsGrounded = false;
+    public float jumpForce;
+	private int jumps = 0;
+	private bool isGrounded = false;
 
     // health variables
     public int MAX_HEALTH = 100;
-    private int mHealth;
+	private int health;
 
     [Header("Ammo")]
-    private int mAmmo;
-    private int mNumberOfBombs = 3;
+	private int ammo;
+	private int bombs = 3;
 
     // Temporary
     private Vector4 oldColor;
 
     // SOUND EFFECTS
-    private AudioSource audioSource;
+	private AudioSource audioSource;
     public AudioClip SFX_JUMP;
     public AudioClip SFX_DOUBLE_JUMP;
     public AudioClip SFX_TAUNT;
@@ -56,30 +54,30 @@ public class Player : MonoBehaviour
 
     public void Awake()
     {
-        mRb2d = GetComponent<Rigidbody2D>();
-        mAnimator = GetComponent<Animator>();
-        mSpriteRenderer = GetComponent<SpriteRenderer>();
-        oldColor = mSpriteRenderer.color;
+        rb2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+		oldColor = spriteRenderer.color;
 
         audioSource = GetComponent<AudioSource>();
 
-        mIsGrounded = true;
-        mHealth = MAX_HEALTH;
+        isGrounded = true;
+        health = MAX_HEALTH;
     }
 
-    public void Init(GameHandler gh, int ID, int shots, int bombs)
+    public void Init(GameHandler gameHandler, int ID, int ammo, int bombs)
     {
-        mGameHandler = gh;
-        mID = ID;
-        mAmmo = shots;
-        mNumberOfBombs = bombs;
+		this.gameHandler = gameHandler;
+        this.ID = ID;
+        this.ammo = ammo;
+        this.bombs = bombs;
     }
 
     private IEnumerator DamageFlash(float dt)
     {
-        mSpriteRenderer.color = Color.red;
+        spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(dt);
-        mSpriteRenderer.color = oldColor;
+        spriteRenderer.color = oldColor;
     }
 
     // Update is called once per frame
@@ -95,28 +93,28 @@ public class Player : MonoBehaviour
 
     private void CheckGrounded()
     {
-        mIsGrounded = Physics2D.OverlapCircle(mGroundChecker.position, mGroundCheckRadius, mWhatIsGround);
-        if (mIsGrounded)
-            mJumps = 0;
+        isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
+        if (isGrounded)
+            jumps = 0;
 
-        mAnimator.SetBool("Grounded", mIsGrounded);
+        animator.SetBool("Grounded", isGrounded);
     }
 
     public void TakeDamage(int dmg, int attackerID)
     {
-        mHealth -= dmg;
+        health -= dmg;
 
         StartCoroutine(DamageFlash(0.05f));
 
-        Debug.Log("Player " + mID + " took " + dmg + " dmg from Player " + attackerID + " at time " + Time.realtimeSinceStartup);
+        Debug.Log("Player " + ID + " took " + dmg + " dmg from Player " + attackerID + " at time " + Time.realtimeSinceStartup);
         GameObject g = Instantiate(PREFAB_TEXT_POPUP, transform.position + 0.5f * new Vector3(0.0f, 0.0f, -0.1f), Quaternion.identity);
         g.GetComponent<TextMesh>().text = "-" + dmg;
 
 
-        if (mHealth <= 0)
+        if (health <= 0)
         {
             Instantiate(PREFAB_DEATH_PARTICLES, transform.position, Quaternion.identity);
-            mGameHandler.RemovePlayer(mID, attackerID);
+            gameHandler.RemovePlayer(ID, attackerID);
 
             audioSource.PlayOneShot(SFX_DEATH);
             Destroy(gameObject);
@@ -125,38 +123,38 @@ public class Player : MonoBehaviour
 
     public void AddHealth(int h)
     {
-        mHealth += h;
+        health += h;
     }
 
     private void Move()
     {
         float x = Input.GetAxis("LEFT_STICK_HORIZONTAL");
 
-        mRb2d.velocity = new Vector2(mSpeed * x, mRb2d.velocity.y);
+        rb2d.velocity = new Vector2(runningSpeed * x, rb2d.velocity.y);
 
         SetFacingDirection(x);
         // update animation
-        mAnimator.SetFloat("Speed", Mathf.Abs(x));
+        animator.SetFloat("Speed", Mathf.Abs(x));
 
-        if (Input.GetButtonDown("JUMP") && mJumps < MAX_JUMPS - 1)
+        if (Input.GetButtonDown("JUMP") && jumps < MAX_JUMPS - 1)
         {
             Jump();
         }
 
-		if (Input.GetButtonDown("THROW_GRENADE") && mNumberOfBombs > 0)
+		if (Input.GetButtonDown("THROW_GRENADE") && bombs > 0)
         {
 			GameObject obj = Instantiate(PREFAB_BOMB, throwPoint.position, throwPoint.rotation);
             obj.transform.localScale = transform.localScale;
 
-            obj.GetComponent<Bomb>().Initiate(mID,1);
+            obj.GetComponent<Bomb>().Initiate(ID,1);
 
-            mNumberOfBombs--;
+            bombs--;
             //mGameHandler.SetAmountOfBombs(mID, mNumberOfBombs);
         }
 
         if (Input.GetButtonDown("TAUNT"))
         {
-            mAnimator.SetTrigger("Taunt");
+            animator.SetTrigger("Taunt");
             audioSource.PlayOneShot(SFX_DEATH);
         }
     }
@@ -175,14 +173,14 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        mRb2d.velocity = new Vector2(mRb2d.velocity.x, mJumpForce);
-        mJumps++;
+        rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
+        jumps++;
 
-        if (mJumps == 1)
+        if (jumps == 1)
         {
             audioSource.PlayOneShot(SFX_JUMP);
         }
-        else if (mJumps == 2)
+        else if (jumps == 2)
         {
             audioSource.PlayOneShot(SFX_DOUBLE_JUMP);
         }
@@ -190,11 +188,11 @@ public class Player : MonoBehaviour
 
     public bool GetIsGrounded()
     {
-        return mIsGrounded;
+        return isGrounded;
     }
 
     public int GetID()
     {
-        return mID;
+        return ID;
     }
 }

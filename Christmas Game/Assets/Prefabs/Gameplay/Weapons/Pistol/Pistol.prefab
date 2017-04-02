@@ -230,7 +230,7 @@ MonoBehaviour:
   AIM_THRESHOLD: 0.2
   recoilFactor: 0.3
   ammo: 90
-  clipSize: 32
+  clipSize: 12
   reloadTime: 0.5
   shouldDropShells: 1
   SHELL: {fileID: 1334723482736558, guid: fc6eaa323095fff43a697dd4067d57ac, type: 2}

@@ -3774,15 +3774,14 @@ MonoBehaviour:
     type: 2}
   PREFAB_DEATH_PARTICLES: {fileID: 121750, guid: aa419b12bfac8084e820cdf58d154994,
     type: 2}
-  weapon: {fileID: 0}
-  mGroundChecker: {fileID: 413407923}
+  groundCheckPoint: {fileID: 413407923}
   throwPoint: {fileID: 965061776}
-  mWhatIsGround:
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 3584
-  mSpeed: 5
+    m_Bits: 768
+  runningSpeed: 5
   MAX_JUMPS: 2
-  mJumpForce: 5
+  jumpForce: 5
   MAX_HEALTH: 100
   SFX_JUMP: {fileID: 8300000, guid: 52fb9800c5c7f924db965db37826398e, type: 3}
   SFX_DOUBLE_JUMP: {fileID: 8300000, guid: 65318d2ecc86e194db7f1a342089bd4f, type: 3}
@@ -4096,7 +4095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 413407923}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: GroundCheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: -6488666005112524639, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

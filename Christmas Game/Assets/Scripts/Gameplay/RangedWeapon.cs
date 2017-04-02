@@ -146,4 +146,9 @@ public class RangedWeapon : MonoBehaviour
 	public void AddAmmo(int a) {
 		ammo += a;
 	}
+
+	public void OnDisable() {
+		isReloading = false;
+		muzzleFlashRenderer.gameObject.SetActive(false);
+	}
 }

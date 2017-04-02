@@ -14,15 +14,11 @@ public class Weapons : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		
-		GameObject go;
 		for (int i = 0; i < startingWeapons.Count; i++) {
 			weapons.Add(Instantiate(startingWeapons[i], transform.position, transform.rotation,this.transform));
 
 		}
 		weapons[0].SetActive(true);
-
-		//Debug.Log(weapons.Count);
     }
 
     // Update is called once per frame

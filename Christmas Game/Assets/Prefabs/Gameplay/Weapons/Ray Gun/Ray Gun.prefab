@@ -226,8 +226,10 @@ MonoBehaviour:
   FIRE_POINT: {fileID: 4658711818773472}
   muzzleFlashRenderer: {fileID: 212100310855695114}
   BULLET: {fileID: 1378952666985686, guid: 3a240a28e53830e41858ba59af50afcb, type: 2}
-  damage: 20
+  damage: 40
   AIM_THRESHOLD: 0.2
+  fireRate: 3
+  isSingle: 0
   recoilFactor: 0.3
   ammo: 90
   clipSize: 12
@@ -235,7 +237,7 @@ MonoBehaviour:
   shouldDropShells: 0
   SHELL: {fileID: 0}
   reloadBar: {fileID: 0}
-  SFX_SHOOT: {fileID: 8300000, guid: 326bf4cb8d8d1a4449dac9cbd47b89b8, type: 3}
+  SFX_SHOOT: {fileID: 8300000, guid: 6c3f8a4cd71ae5b48b9c416e09edbdfb, type: 3}
   SFX_RELOAD: {fileID: 8300000, guid: 7603bdc662325654996c6e98e0e6eb56, type: 3}
 --- !u!212 &212100310855695114
 SpriteRenderer:

@@ -14,7 +14,10 @@ public class RangedWeapon : MonoBehaviour
 
     public float AIM_THRESHOLD = 0.2f;
 
+	public float fireRate;
+	private float fireTime;
     float timer = 0.0f;
+	public bool isSingle;
 
     private float recoil = 0.0f;
     public float recoilFactor = 10.0f;
@@ -47,25 +50,34 @@ public class RangedWeapon : MonoBehaviour
         ammoInClip = clipSize;
 
         audioSource = GetComponent<AudioSource>();
+
+		fireTime = 1.0f / fireRate;
     }
 
     // Update is called once per frame
     void Update()
     {
+		// Ugly hax
 
-        if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
-        {
-            Shoot();
-            Debug.Log("Ammo in magazine: " + ammoInClip);
-        }
-        else if (Input.GetButton("RELOAD") && !isReloading)
-        {
-            StartCoroutine(Reload(reloadTime));
+		if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
+		{
+			Shoot();
+			Debug.Log("Ammo in magazine: " + ammoInClip);
+		}
+		else if (Input.GetButton("RELOAD") && !isReloading)
+		{
+				StartCoroutine(Reload(reloadTime));
 		}
 
-        timer -= Time.deltaTime;
-        recoil -= Time.deltaTime;
-        recoil = Mathf.Max(0.0f, recoil);
+		if (isSingle) {
+			if (Input.GetAxis ("RIGHT_TRIGGER") == 0.0f) {
+				timer = 0.0f;
+			}
+		}
+
+		timer -= Time.deltaTime;
+		recoil -= Time.deltaTime;
+		recoil = Mathf.Max(0.0f, recoil);	
     }
 
     private void Shoot()
@@ -90,7 +102,6 @@ public class RangedWeapon : MonoBehaviour
         GameObject obj = Instantiate(BULLET, FIRE_POINT.position, spawnRot);
 		obj.GetComponent<Attack>().Initiate(0,damage);
 
-
 		StartCoroutine(ShowMuzzleFlash(0.05f));
 
 		if(shouldDropShells)
@@ -98,7 +109,12 @@ public class RangedWeapon : MonoBehaviour
 
         audioSource.PlayOneShot(SFX_SHOOT);
 
-        timer = 0.2f;
+		if (isSingle) {
+			timer = Mathf.Infinity;
+		} else {
+			timer = fireTime;
+		}
+        
         ammoInClip--;
     }
 

@@ -67,11 +67,11 @@ public class RangedWeapon : MonoBehaviour
         if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
         {
             Shoot();
-            Debug.Log("Ammo in magazine: " + ammoInClip);
         }
         else if (Input.GetButton("RELOAD") && !isReloading)
         {
-            StartCoroutine(Reload(RELOAD_TIME));
+            if (ammoInClip < clipSize && ammo > 0)
+                StartCoroutine(Reload(RELOAD_TIME));
         }
 
         if (isReloading)
@@ -161,8 +161,8 @@ public class RangedWeapon : MonoBehaviour
             ammo = 0;
         }
 
-      //  Debug.Log("Reload, ammo in clip: " + ammoInClip);
-      //  Debug.Log("Reload, total ammo: " + ammo);
+        //  Debug.Log("Reload, ammo in clip: " + ammoInClip);
+        //  Debug.Log("Reload, total ammo: " + ammo);
 
         isReloading = false;
         reloadBar.gameObject.SetActive(false);

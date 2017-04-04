@@ -2,5 +2,6 @@
 	UNARMED,
 	PISTOL,
 	AK47,
-	LASER
+	LASER,
+    SHOTGUN
 }

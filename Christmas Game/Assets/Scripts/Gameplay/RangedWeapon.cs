@@ -6,7 +6,7 @@ public class RangedWeapon : MonoBehaviour
 {
     public WeaponID weaponID;
 
-    public Transform FIRE_POINT;
+    public Transform[] FIRE_POINTS;
     public SpriteRenderer muzzleFlashRenderer;
 
     public GameObject BULLET;
@@ -66,7 +66,22 @@ public class RangedWeapon : MonoBehaviour
 
         if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
         {
-            Shoot();
+            for (int i = 0; i < FIRE_POINTS.Length; i++)
+            {
+                Shoot(i);
+            }
+
+            if (isSingle)
+            {
+                timer = Mathf.Infinity;
+            }
+            else
+            {
+                timer = fireTime;
+            }
+
+            ammoInClip--;
+
         }
         else if (Input.GetButton("RELOAD") && !isReloading)
         {
@@ -98,10 +113,13 @@ public class RangedWeapon : MonoBehaviour
         GUI.Label(new Rect(80, 100, 200, 200), ammoInClip + "/" + ammo);
     }
 
-    private void Shoot()
+    private void Shoot(int currentFirePointIndex)
     {
-        Vector3 playerLocalScale = transform.parent.transform.parent.localScale;
+        Vector3 playerLocalScale = transform.parent.parent.localScale;
         Vector3 localRot = transform.parent.localEulerAngles;
+        float firePointRot = FIRE_POINTS[currentFirePointIndex].localEulerAngles.z;
+
+        localRot.z += firePointRot;
 
         // If flipped to the left - flip x-wise
         if (playerLocalScale.x < 0.0f)
@@ -117,7 +135,7 @@ public class RangedWeapon : MonoBehaviour
 
         Quaternion spawnRot = Quaternion.Euler(localRot);
 
-        GameObject obj = Instantiate(BULLET, FIRE_POINT.position, spawnRot);
+        GameObject obj = Instantiate(BULLET, FIRE_POINTS[currentFirePointIndex].position, spawnRot);
         obj.GetComponent<Attack>().Initiate(0, damage);
 
         StartCoroutine(ShowMuzzleFlash(0.05f));
@@ -126,17 +144,6 @@ public class RangedWeapon : MonoBehaviour
             Instantiate(SHELL, transform.position, transform.rotation);
 
         audioSource.PlayOneShot(SFX_SHOOT);
-
-        if (isSingle)
-        {
-            timer = Mathf.Infinity;
-        }
-        else
-        {
-            timer = fireTime;
-        }
-
-        ammoInClip--;
     }
 
     private IEnumerator Reload(float dt)

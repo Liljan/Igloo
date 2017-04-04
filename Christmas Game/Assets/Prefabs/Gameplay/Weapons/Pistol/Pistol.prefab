@@ -46,7 +46,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1784214843290224
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -62,7 +62,7 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &1848269442692606
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -85,11 +85,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0.115, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4989425283121486}
-  - {fileID: 4677749357966844}
+  m_Children: []
   m_Father: {fileID: 4973047913137692}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4677749357966844
 Transform:
@@ -98,11 +96,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1784214843290224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.35, y: 0, z: 0}
+  m_LocalPosition: {x: 0.6500001, y: 0.11500001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4192962838967172}
-  m_RootOrder: 1
+  m_Father: {fileID: 4973047913137692}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4973047913137692
 Transform:
@@ -114,6 +112,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4677749357966844}
+  - {fileID: 4989425283121486}
   - {fileID: 4192962838967172}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -125,11 +125,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1848269442692606}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0029998, y: -0, z: 0}
+  m_LocalPosition: {x: 2.0029998, y: 0.11500001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4192962838967172}
-  m_RootOrder: 0
+  m_Father: {fileID: 4973047913137692}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &82828986169359218
 AudioSource:
@@ -223,7 +223,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponID: 1
-  FIRE_POINT: {fileID: 4192962838967172}
+  FIRE_POINTS:
+  - {fileID: 4192962838967172}
   muzzleFlashRenderer: {fileID: 212610137863068974}
   BULLET: {fileID: 1378952666985686, guid: ee18d3912837ff94b907d8b49df81e1d, type: 2}
   damage: 10
@@ -233,10 +234,9 @@ MonoBehaviour:
   recoilFactor: 0.3
   ammo: 90
   clipSize: 12
-  reloadTime: 0.5
+  RELOAD_TIME: 0.5
   shouldDropShells: 1
   SHELL: {fileID: 1334723482736558, guid: fc6eaa323095fff43a697dd4067d57ac, type: 2}
-  reloadBar: {fileID: 0}
   SFX_SHOOT: {fileID: 8300000, guid: 6c3f8a4cd71ae5b48b9c416e09edbdfb, type: 3}
   SFX_RELOAD: {fileID: 8300000, guid: 7603bdc662325654996c6e98e0e6eb56, type: 3}
 --- !u!212 &212004281980945656

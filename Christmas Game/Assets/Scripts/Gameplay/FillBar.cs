@@ -5,9 +5,8 @@ using UnityEngine;
 public class FillBar : MonoBehaviour
 {
     public GameObject Bar;
-    private float fill;
 
-    void Set(float amount)
+    public void SetFill(float amount)
     {
         Vector3 scale = Bar.transform.localScale;
         scale.x = amount;

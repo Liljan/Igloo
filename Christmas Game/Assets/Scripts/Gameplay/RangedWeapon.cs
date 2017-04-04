@@ -4,85 +4,103 @@ using UnityEngine;
 
 public class RangedWeapon : MonoBehaviour
 {
-	public WeaponID weaponID;
+    public WeaponID weaponID;
 
     public Transform FIRE_POINT;
-	public SpriteRenderer muzzleFlashRenderer;
+    public SpriteRenderer muzzleFlashRenderer;
 
     public GameObject BULLET;
-	public int damage;
+    public int damage;
 
     public float AIM_THRESHOLD = 0.2f;
 
-	public float fireRate;
-	private float fireTime;
+    public float fireRate;
+    private float fireTime;
     float timer = 0.0f;
-	public bool isSingle;
+    public bool isSingle;
 
     private float recoil = 0.0f;
     public float recoilFactor = 10.0f;
 
-	[Header("Ammo")]
+    [Header("Ammo")]
     public int ammo = 20;
     public int clipSize = 8;
     private int ammoInClip;
+
+    [Header("Reload")]
+    private FillBar reloadBar;
     private bool isReloading = false;
 
-    public float reloadTime = 0.5f;
+    public float RELOAD_TIME = 0.5f;
+    private float currentReloadTime;
 
-	// Shell casings
-	[Header("Shell casings")]
-	public bool shouldDropShells = true;
-	public GameObject SHELL;
-
-    // Bars
-    public FillBar reloadBar;
+    // Shell casings
+    [Header("Shell casings")]
+    public bool shouldDropShells = true;
+    public GameObject SHELL;
 
     // SOUND EFFECTS
-	[Header("Sound Effects")]
+    [Header("Sound Effects")]
     private AudioSource audioSource;
     public AudioClip SFX_SHOOT;
     public AudioClip SFX_RELOAD;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         ammoInClip = clipSize;
 
         audioSource = GetComponent<AudioSource>();
 
-		fireTime = 1.0f / fireRate;
+        // another ugly hax
+        reloadBar = transform.parent.parent.GetComponentInChildren<FillBar>();
+        //reloadBar.gameObject.SetActive(false);
+
+        fireTime = 1.0f / fireRate;
     }
 
     // Update is called once per frame
     void Update()
     {
-		// Ugly hax
+        // Ugly hax
 
-		if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
-		{
-			Shoot();
-			Debug.Log("Ammo in magazine: " + ammoInClip);
-		}
-		else if (Input.GetButton("RELOAD") && !isReloading)
-		{
-				StartCoroutine(Reload(reloadTime));
-		}
+        if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
+        {
+            Shoot();
+            Debug.Log("Ammo in magazine: " + ammoInClip);
+        }
+        else if (Input.GetButton("RELOAD") && !isReloading)
+        {
+            StartCoroutine(Reload(RELOAD_TIME));
+        }
 
-		if (isSingle) {
-			if (Input.GetAxis ("RIGHT_TRIGGER") == 0.0f) {
-				timer = 0.0f;
-			}
-		}
+        if (isReloading)
+        {
+            currentReloadTime += Time.deltaTime;
+            reloadBar.SetFill(Mathf.Lerp(0.0f, 1.0f, currentReloadTime / RELOAD_TIME));
+        }
 
-		timer -= Time.deltaTime;
-		recoil -= Time.deltaTime;
-		recoil = Mathf.Max(0.0f, recoil);	
+        if (isSingle)
+        {
+            if (Input.GetAxis("RIGHT_TRIGGER") == 0.0f)
+            {
+                timer = 0.0f;
+            }
+        }
+
+        timer -= Time.deltaTime;
+        recoil -= Time.deltaTime;
+        recoil = Mathf.Max(0.0f, recoil);
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(80, 100, 200, 200), ammoInClip + "/" + ammo);
     }
 
     private void Shoot()
     {
-		Vector3 playerLocalScale = transform.parent.transform.parent.localScale;
+        Vector3 playerLocalScale = transform.parent.transform.parent.localScale;
         Vector3 localRot = transform.parent.localEulerAngles;
 
         // If flipped to the left - flip x-wise
@@ -100,21 +118,24 @@ public class RangedWeapon : MonoBehaviour
         Quaternion spawnRot = Quaternion.Euler(localRot);
 
         GameObject obj = Instantiate(BULLET, FIRE_POINT.position, spawnRot);
-		obj.GetComponent<Attack>().Initiate(0,damage);
+        obj.GetComponent<Attack>().Initiate(0, damage);
 
-		StartCoroutine(ShowMuzzleFlash(0.05f));
+        StartCoroutine(ShowMuzzleFlash(0.05f));
 
-		if(shouldDropShells)
-			Instantiate(SHELL, transform.position, transform.rotation);
+        if (shouldDropShells)
+            Instantiate(SHELL, transform.position, transform.rotation);
 
         audioSource.PlayOneShot(SFX_SHOOT);
 
-		if (isSingle) {
-			timer = Mathf.Infinity;
-		} else {
-			timer = fireTime;
-		}
-        
+        if (isSingle)
+        {
+            timer = Mathf.Infinity;
+        }
+        else
+        {
+            timer = fireTime;
+        }
+
         ammoInClip--;
     }
 
@@ -122,6 +143,9 @@ public class RangedWeapon : MonoBehaviour
     {
         isReloading = true;
         audioSource.PlayOneShot(SFX_RELOAD);
+
+        currentReloadTime = 0.0f;
+        reloadBar.gameObject.SetActive(true);
         yield return new WaitForSeconds(dt);
 
         ammo += ammoInClip;
@@ -137,34 +161,44 @@ public class RangedWeapon : MonoBehaviour
             ammo = 0;
         }
 
-        Debug.Log("Reload, ammo in clip: " + ammoInClip);
-        Debug.Log("Reload, total ammo: " + ammo);
+      //  Debug.Log("Reload, ammo in clip: " + ammoInClip);
+      //  Debug.Log("Reload, total ammo: " + ammo);
 
         isReloading = false;
+        reloadBar.gameObject.SetActive(false);
     }
 
-	private IEnumerator ShowMuzzleFlash(float dt)
-	{
-		muzzleFlashRenderer.gameObject.SetActive(true);
+    private IEnumerator ShowMuzzleFlash(float dt)
+    {
+        muzzleFlashRenderer.gameObject.SetActive(true);
 
-		if (Random.value > 0.5) {
-			muzzleFlashRenderer.flipY = true;
-		}
-		else
-		{
-			muzzleFlashRenderer.flipY = false;
-		}
+        if (Random.value > 0.5)
+        {
+            muzzleFlashRenderer.flipY = true;
+        }
+        else
+        {
+            muzzleFlashRenderer.flipY = false;
+        }
 
-		yield return new WaitForSeconds(dt);
-		muzzleFlashRenderer.gameObject.SetActive(false);
-	}
+        yield return new WaitForSeconds(dt);
+        muzzleFlashRenderer.gameObject.SetActive(false);
+    }
 
-	public void AddAmmo(int a) {
-		ammo += a;
-	}
+    public void AddAmmo(int a)
+    {
+        ammo += a;
+    }
 
-	public void OnDisable() {
-		isReloading = false;
-		muzzleFlashRenderer.gameObject.SetActive(false);
-	}
+    public void OnEnable()
+    {
+        reloadBar.gameObject.SetActive(false);
+    }
+
+    public void OnDisable()
+    {
+        isReloading = false;
+        muzzleFlashRenderer.gameObject.SetActive(false);
+        reloadBar.gameObject.SetActive(true);
+    }
 }

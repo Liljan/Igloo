@@ -20,9 +20,13 @@ public class Player : MonoBehaviour
     [Header("Collision")]
     public LayerMask groundLayer;
 
-    // components
+    // physics
     private Rigidbody2D rb2d;
-	private Animator animator;
+
+
+    // RENDERING
+    [Header("Collision")]
+    private Animator animator;
     private SpriteRenderer spriteRenderer;
 
     // movement variables

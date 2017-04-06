@@ -3941,6 +3941,7 @@ GameObject:
   - component: {fileID: 287043894}
   - component: {fileID: 287043893}
   - component: {fileID: 287043892}
+  - component: {fileID: 287043898}
   m_Layer: 0
   m_Name: Dude
   m_TagString: Player
@@ -4129,7 +4130,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 23f16a8f41b890446b3edcc2509b1b3b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4151,6 +4152,18 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &287043898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 287043891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ce01b117a75c64c95619a382f566db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mSpriteRenderer: {fileID: 287043897}
 --- !u!1 &294801052
 GameObject:
   m_ObjectHideFlags: 0

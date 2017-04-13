@@ -54,7 +54,10 @@ public class RangedWeapon : MonoBehaviour
 
         // another ugly hax
         reloadBar = transform.parent.parent.GetComponentInChildren<FillBar>();
-        //reloadBar.gameObject.SetActive(false);
+        if (!reloadBar)
+        {
+            Debug.Log("Reloadbar does not exist");
+        }
 
         fireTime = 1.0f / fireRate;
     }
@@ -207,5 +210,10 @@ public class RangedWeapon : MonoBehaviour
         isReloading = false;
         muzzleFlashRenderer.gameObject.SetActive(false);
         reloadBar.gameObject.SetActive(true);
+
+        if (reloadBar.isActiveAndEnabled)
+        {
+            Debug.Log("Reload bar is active");
+        }
     }
 }

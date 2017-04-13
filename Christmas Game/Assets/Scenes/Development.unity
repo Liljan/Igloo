@@ -555,7 +555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &198979499
 ParticleSystemRenderer:
   serializedVersion: 2
@@ -661,7 +661,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1871518182
+  randomSeed: 269548040
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4158,7 +4158,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 287043891}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0ce01b117a75c64c95619a382f566db, type: 3}
   m_Name: 
@@ -4416,7 +4416,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4442615226702112, guid: 22b0ed3f71a162d449d7941879262e4d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.4053879
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4442615226702112, guid: 22b0ed3f71a162d449d7941879262e4d, type: 2}
       propertyPath: m_LocalPosition.y
@@ -8769,8 +8769,8 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
+  m_HorizontalAxis: LEFT_STICK_HORIZONTAL
+  m_VerticalAxis: LEFT_STICK_VERTICAL
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10

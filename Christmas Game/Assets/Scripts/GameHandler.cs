@@ -5,70 +5,55 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public GameObject[] PREFAB_PLAYERS;
-    public PlayerUI[] playerUI;
+    public GameObject PREFAB_PLAYER;
     public Color[] playerColors;
-    public String[] playerNames;
+    public string[] playerNames;
     public Transform[] spawnPoints;
 
     public int NUMBER_OF_PLAYERS = 1;
 
+    private UI_Handler UI_HANDLER;
+
     // gameplay stats
 
     // Temporary solution, bad
-    private int[] amountOfLives = { 0, 0, 0, 0 };
+    private int[] amountOfLives = { 3, 3, 3, 3 };
+
+    void Awake()
+    {
+        UI_HANDLER = GameObject.FindObjectOfType<UI_Handler>();
+    }
 
     // Use this for initialization
     void Start()
     {
-        for (int i = 0; i < playerUI.Length; i++)
-        {
-            playerUI[i].gameObject.SetActive(false);
-        }
+        UI_HANDLER.Initialize(NUMBER_OF_PLAYERS);
 
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++)
         {
             SpawnPlayer(i);
-            amountOfLives[i] = 3;
-            InitGUI(i);
         }
     }
 
     private void SpawnPlayer(int playerIndex)
     {
-        GameObject playerObj = Instantiate(PREFAB_PLAYERS[playerIndex], spawnPoints[playerIndex].position, Quaternion.identity);
+        GameObject playerObj = Instantiate(PREFAB_PLAYER, spawnPoints[playerIndex].position, Quaternion.identity);
         Player player = playerObj.GetComponent<Player>();
 
-        player.Init(this, playerIndex, 20, 6);
-    }
-
-    private void InitGUI(int playerIndex)
-    {
-        playerUI[playerIndex].gameObject.SetActive(true);
-        playerUI[playerIndex].Initiate(playerNames[playerIndex], amountOfLives[playerIndex], 20, 6, playerColors[playerIndex]);
-    }
-
-    public void SetAmountOfBombs(int playerIndex, int n)
-    {
-        playerUI[playerIndex].SetBombs(n);
-    }
-
-    public void SetAmountOfAmmo(int playerIndex, int n)
-    {
-        playerUI[playerIndex].SetAmmo(n);
+        player.Initialize(this, playerIndex);
     }
 
     public void RemovePlayer(int playerID, int attackerID)
     {
         // wait some time...
         if (attackerID >= 0)
-            Debug.Log("Player " + attackerID + " fraged player " + playerID);
+            Debug.Log("Player " + attackerID + " fragged player " + playerID);
 
         // then...
         --amountOfLives[playerID];
 
         if (amountOfLives[playerID] >= 0)
-            playerUI[playerID].SetLives(amountOfLives[playerID]);
+            UI_HANDLER.SetLivesUI(playerID, amountOfLives[playerID].ToString());
 
         if (amountOfLives[playerID] > 0)
             SpawnPlayer(playerID);
@@ -77,6 +62,6 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // Is there only one player? -> Trigger victory for that player
     }
 }

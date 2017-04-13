@@ -12,7 +12,7 @@ public class PlayerUI : MonoBehaviour
 
     public Color mColor;
 
-    public void Initiate(string name, int lives, int ammo, int bombs, Color color)
+    public void Initiate(string name, string lives, string ammo, string bombs, Color color)
     {
         SetName(name);
         SetLives(lives);
@@ -22,19 +22,19 @@ public class PlayerUI : MonoBehaviour
         SetColor(color);
     }
 
-    public void SetAmmo(int ammo)
+    public void SetAmmo(string ammo)
     {
-        mAmmo.text = ammo.ToString();
+        mAmmo.text = ammo;
     }
 
-    public void SetBombs(int bombs)
+    public void SetBombs(string bombs)
     {
-        mBombs.text = bombs.ToString();
+        mBombs.text = bombs;
     }
 
-    public void SetLives(int lives)
+    public void SetLives(string lives)
     {
-        mLives.text = lives.ToString();
+        mLives.text = lives;
     }
 
     public void SetName(string name)

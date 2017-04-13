@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
 	private int ID;
     private GameHandler gameHandler;
+    public Weapons weaponSystem;
 
     // Prefabs
     [Header("Prefabs")]
@@ -69,12 +70,13 @@ public class Player : MonoBehaviour
         health = MAX_HEALTH;
     }
 
-    public void Init(GameHandler gameHandler, int ID, int ammo, int bombs)
+    public void Initialize(GameHandler gameHandler, int ID)
     {
 		this.gameHandler = gameHandler;
         this.ID = ID;
-        this.ammo = ammo;
-        this.bombs = bombs;
+        this.bombs = 5;
+
+        weaponSystem.Initiate(this.ID);
     }
 
     private IEnumerator DamageFlash(float dt)

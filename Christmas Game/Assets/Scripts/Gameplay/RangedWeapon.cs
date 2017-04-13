@@ -5,6 +5,9 @@ using UnityEngine;
 public class RangedWeapon : MonoBehaviour
 {
     public WeaponID weaponID;
+    private int playerID;
+
+    private UI_Handler UI_HANDLER;
 
     public Transform[] FIRE_POINTS;
     public SpriteRenderer muzzleFlashRenderer;
@@ -48,24 +51,24 @@ public class RangedWeapon : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        ammoInClip = clipSize;
-
+        UI_HANDLER = FindObjectOfType<UI_Handler>();
         audioSource = GetComponent<AudioSource>();
 
         // another ugly hax
         reloadBar = transform.parent.parent.GetComponentInChildren<FillBar>();
-        if (!reloadBar)
-        {
-            Debug.Log("Reloadbar does not exist");
-        }
+    }
 
+    public void Initiate(int playerID)
+    {
+        this.playerID = playerID;
+
+        ammoInClip = clipSize;
         fireTime = 1.0f / fireRate;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Ugly hax
 
         if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
         {
@@ -84,6 +87,7 @@ public class RangedWeapon : MonoBehaviour
             }
 
             ammoInClip--;
+            UI_HANDLER.SetAmmoUI(playerID, ammoInClip + "/" + ammo);
 
         }
         else if (Input.GetButton("RELOAD") && !isReloading)
@@ -156,6 +160,8 @@ public class RangedWeapon : MonoBehaviour
 
         currentReloadTime = 0.0f;
         reloadBar.gameObject.SetActive(true);
+
+        UI_HANDLER.SetAmmoUI(playerID, "Reloading");
         yield return new WaitForSeconds(dt);
 
         ammo += ammoInClip;
@@ -171,11 +177,9 @@ public class RangedWeapon : MonoBehaviour
             ammo = 0;
         }
 
-        //  Debug.Log("Reload, ammo in clip: " + ammoInClip);
-        //  Debug.Log("Reload, total ammo: " + ammo);
-
         isReloading = false;
         reloadBar.gameObject.SetActive(false);
+        UI_HANDLER.SetAmmoUI(playerID, ammoInClip + "/" + ammo);
     }
 
     private IEnumerator ShowMuzzleFlash(float dt)
@@ -203,6 +207,7 @@ public class RangedWeapon : MonoBehaviour
     public void OnEnable()
     {
         reloadBar.gameObject.SetActive(false);
+        UI_HANDLER.SetAmmoUI(playerID, ammoInClip + "/" + ammo);
     }
 
     public void OnDisable()
@@ -210,10 +215,5 @@ public class RangedWeapon : MonoBehaviour
         isReloading = false;
         muzzleFlashRenderer.gameObject.SetActive(false);
         reloadBar.gameObject.SetActive(true);
-
-        if (reloadBar.isActiveAndEnabled)
-        {
-            Debug.Log("Reload bar is active");
-        }
     }
 }

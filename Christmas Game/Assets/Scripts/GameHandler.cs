@@ -11,13 +11,14 @@ public class GameHandler : MonoBehaviour
     public Transform[] spawnPoints;
 
     public int NUMBER_OF_PLAYERS = 1;
+    private int alivePlayers;
 
     private UI_Handler UI_HANDLER;
 
     // gameplay stats
 
     // Temporary solution, bad
-    private int[] amountOfLives = { 3, 3, 3, 3 };
+    private int[] amountOfLives = { 1, 1, 1, 1 };
 
     void Awake()
     {
@@ -33,6 +34,8 @@ public class GameHandler : MonoBehaviour
         {
             SpawnPlayer(i);
         }
+
+        alivePlayers = NUMBER_OF_PLAYERS;
     }
 
     private void SpawnPlayer(int playerIndex)
@@ -56,7 +59,24 @@ public class GameHandler : MonoBehaviour
             UI_HANDLER.SetLivesUI(playerID, amountOfLives[playerID].ToString());
 
         if (amountOfLives[playerID] > 0)
+        {
             SpawnPlayer(playerID);
+        }
+        else
+        {
+            alivePlayers--;
+            if (alivePlayers == 1)
+            {
+                StartCoroutine(Victory(2.0f));
+            }
+        }
+    }
+
+    private IEnumerator Victory(float dt)
+    {
+        UI_HANDLER.EnableVictory(1337);
+        yield return new WaitForSeconds(dt);
+        UI_HANDLER.DisableVictory();
     }
 
     // Update is called once per frame

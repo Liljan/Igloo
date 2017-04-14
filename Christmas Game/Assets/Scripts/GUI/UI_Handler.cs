@@ -22,10 +22,10 @@ public class UI_Handler : MonoBehaviour
     public void Initialize(int amountOfPlayers)
     {
         this.amountOfPlayers = amountOfPlayers;
-        
+
         for (int i = 0; i < amountOfPlayers; i++)
         {
-            playerUI[i].gameObject.SetActive(true);  
+            playerUI[i].gameObject.SetActive(true);
         }
     }
 
@@ -55,6 +55,12 @@ public class UI_Handler : MonoBehaviour
         victoryText.color = color;
 
         victoryText.text = playerName + "!\nA WINNER IS YOU!";
+    }
+
+    public void EnableTie()
+    {
+        victoryText.gameObject.SetActive(true);
+        victoryText.text = "Tie!\nIs that even possible?!";
     }
 
     public void DisableVictory()

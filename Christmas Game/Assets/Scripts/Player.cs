@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
     [Header("Ammo")]
 	private int ammo;
-	private int bombs = 3;
+	private int bombs = 10;
 
     // Temporary
     private Vector4 oldColor;

@@ -72,7 +72,7 @@ public class GameHandler : MonoBehaviour
             alivePlayers--;
             if (alivePlayers == 1)
             {
-                StartCoroutine(Victory(2.0f));
+                StartCoroutine(Victory(4.0f));
             }
         }
     }
@@ -85,13 +85,17 @@ public class GameHandler : MonoBehaviour
 
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++)
         {
-            if(amountOfLives[i] > mostLives)
+            if (amountOfLives[i] > mostLives)
             {
                 winnerID = i;
             }
         }
 
-        UI_HANDLER.EnableVictory(playerNames[winnerID], playerColors[winnerID]);
+        if (winnerID != -1)
+            UI_HANDLER.EnableVictory(playerNames[winnerID], playerColors[winnerID]);
+        else
+            UI_HANDLER.EnableTie();
+
         yield return new WaitForSeconds(dt);
         UI_HANDLER.DisableVictory();
     }

@@ -115,11 +115,6 @@ public class RangedWeapon : MonoBehaviour
         recoil = Mathf.Max(0.0f, recoil);
     }
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(80, 100, 200, 200), ammoInClip + "/" + ammo);
-    }
-
     private void Shoot(int currentFirePointIndex)
     {
         Vector3 playerLocalScale = transform.parent.parent.localScale;

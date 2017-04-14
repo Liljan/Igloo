@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
 	private int ID;
     private GameHandler gameHandler;
-    public Weapons weaponSystem;
+    public WeaponHandler weaponSystem;
 
     // Prefabs
     [Header("Prefabs")]

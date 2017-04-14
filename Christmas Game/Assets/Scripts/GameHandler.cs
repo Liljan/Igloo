@@ -33,6 +33,7 @@ public class GameHandler : MonoBehaviour
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++)
         {
             SpawnPlayer(i);
+            UI_HANDLER.SetLivesUI(i, amountOfLives[i].ToString());
         }
 
         alivePlayers = NUMBER_OF_PLAYERS;
@@ -82,6 +83,6 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Is there only one player? -> Trigger victory for that player
+
     }
 }

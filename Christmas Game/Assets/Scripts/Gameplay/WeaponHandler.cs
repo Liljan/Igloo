@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapons : MonoBehaviour
+public class WeaponHandler : MonoBehaviour
 {
     public int playerID;
 
@@ -114,9 +114,7 @@ public class Weapons : MonoBehaviour
 
     public void AddWeapon(GameObject newWeapon)
     {
-
         WeaponID newWeaponID = newWeapon.GetComponent<RangedWeapon>().weaponID;
-
         RangedWeapon currentWeapon;
 
         bool found = false;

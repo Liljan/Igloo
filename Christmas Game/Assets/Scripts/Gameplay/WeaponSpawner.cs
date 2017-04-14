@@ -34,7 +34,7 @@ public class WeaponSpawner : MonoBehaviour {
 		if (isEnabled) {
 			
 			if (col.tag == "Player") {
-				Weapons weaponSystem = col.gameObject.GetComponentInChildren<Weapons>();
+				WeaponHandler weaponSystem = col.gameObject.GetComponentInChildren<WeaponHandler>();
 				weaponSystem.AddWeapon(WeaponPrefab);
 
 				DisablePickup();

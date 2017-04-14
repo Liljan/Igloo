@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class UI_Handler : MonoBehaviour
 {
     public PlayerUI[] playerUI;
-    public string[] playerNames;
-
     public Text victoryText;
 
     private int amountOfPlayers;
@@ -27,8 +25,7 @@ public class UI_Handler : MonoBehaviour
         
         for (int i = 0; i < amountOfPlayers; i++)
         {
-            playerUI[i].gameObject.SetActive(true);
-           
+            playerUI[i].gameObject.SetActive(true);  
         }
     }
 
@@ -52,10 +49,12 @@ public class UI_Handler : MonoBehaviour
         playerUI[playerID].SetAmmo(ammo);
     }
 
-    public void EnableVictory(int playerID, Color color)
+    public void EnableVictory(string playerName, Color color)
     {
         victoryText.gameObject.SetActive(true);
         victoryText.color = color;
+
+        victoryText.text = playerName + "!\nA WINNER IS YOU!";
     }
 
     public void DisableVictory()

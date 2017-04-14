@@ -91,7 +91,7 @@ public class GameHandler : MonoBehaviour
             }
         }
 
-        UI_HANDLER.EnableVictory(winnerID, playerColors[winnerID]);
+        UI_HANDLER.EnableVictory(playerNames[winnerID], playerColors[winnerID]);
         yield return new WaitForSeconds(dt);
         UI_HANDLER.DisableVictory();
     }

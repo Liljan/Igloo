@@ -5753,11 +5753,6 @@ MonoBehaviour:
   - {fileID: 1323613033}
   - {fileID: 1621714792}
   - {fileID: 732591379}
-  playerNames:
-  - My
-  - Name
-  - Is
-  - Max
   victoryText: {fileID: 771518357}
 --- !u!1 &1096395765
 GameObject:
@@ -7322,7 +7317,7 @@ MonoBehaviour:
   - {fileID: 1050906758}
   - {fileID: 1119648471}
   - {fileID: 815610050}
-  NUMBER_OF_PLAYERS: 4
+  NUMBER_OF_PLAYERS: 2
 --- !u!4 &1518897798
 Transform:
   m_ObjectHideFlags: 0

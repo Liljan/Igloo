@@ -30,8 +30,8 @@ public class WeaponHandler : MonoBehaviour
     void Update()
     {
         // Compensate the input for player turning, i.e. flipping in the x-direction.
-        float x = Input.GetAxis("RIGHT_STICK_HORIZONTAL") * transform.parent.localScale.x;
-        float y = Input.GetAxis("RIGHT_STICK_VERTICAL") * transform.parent.localScale.x;
+        float x = Input.GetAxis(JoystickControlls.RIGHT_HORIZONTAL[playerID]) * transform.parent.localScale.x;
+        float y = Input.GetAxis(JoystickControlls.RIGHT_VERTICAL[playerID]) * transform.parent.localScale.x;
 
         float aimAngle = 0.0f;
 

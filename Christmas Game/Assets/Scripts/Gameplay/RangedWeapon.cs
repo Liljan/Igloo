@@ -70,7 +70,7 @@ public class RangedWeapon : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetAxis("RIGHT_TRIGGER") > 0.0f && timer <= 0.0f && ammoInClip > 0)
+        if (Input.GetAxis((JoystickControlls.RIGHT_TRIGGER[playerID])) > 0.0f && timer <= 0.0f && ammoInClip > 0)
         {
             for (int i = 0; i < FIRE_POINTS.Length; i++)
             {
@@ -104,7 +104,7 @@ public class RangedWeapon : MonoBehaviour
 
         if (isSingle)
         {
-            if (Input.GetAxis("RIGHT_TRIGGER") == 0.0f)
+            if (Input.GetAxis(JoystickControlls.RIGHT_TRIGGER[playerID]) == 0.0f)
             {
                 timer = 0.0f;
             }

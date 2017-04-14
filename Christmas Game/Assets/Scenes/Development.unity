@@ -3869,6 +3869,66 @@ Prefab:
       propertyPath: m_Name
       value: Stats (0)
       objectReference: {fileID: 0}
+    - target: {fileID: 224778715809013480, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224778715809013480, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224778715809013480, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 224778715809013480, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224042914352387322, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224042914352387322, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224042914352387322, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 132
+      objectReference: {fileID: 0}
+    - target: {fileID: 224042914352387322, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224653072565325440, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224653072565325440, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224653072565325440, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 232
+      objectReference: {fileID: 0}
+    - target: {fileID: 224653072565325440, guid: 5021725e13f142649a6cd8ae3bf5dad3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5021725e13f142649a6cd8ae3bf5dad3, type: 2}
   m_IsPrefabParent: 0
@@ -8101,8 +8161,8 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: LEFT_STICK_HORIZONTAL
-  m_VerticalAxis: LEFT_STICK_VERTICAL
+  m_HorizontalAxis: LEFT_HORIZONTAL_1
+  m_VerticalAxis: LEFT_VERTICAL_1
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10

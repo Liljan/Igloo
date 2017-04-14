@@ -4,7 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     private UI_Handler UI_HANDLER;
-	private int ID;
+    private int ID;
     private GameHandler gameHandler;
     public WeaponHandler weaponSystem;
 
@@ -16,8 +16,8 @@ public class Player : MonoBehaviour
 
     [Header("Transform Points")]
     public Transform groundCheckPoint;
-	public Transform throwPoint;
-	private float groundCheckRadius = 0.1f;
+    public Transform throwPoint;
+    private float groundCheckRadius = 0.1f;
 
     [Header("Collision")]
     public LayerMask groundLayer;
@@ -35,21 +35,21 @@ public class Player : MonoBehaviour
     public float runningSpeed = 1.0f;
     public int MAX_JUMPS = 2;
     public float jumpForce;
-	private int jumps = 0;
-	private bool isGrounded = false;
+    private int jumps = 0;
+    private bool isGrounded = false;
 
     // health variables
     public int MAX_HEALTH = 100;
-	private int health;
+    private int health;
 
     [Header("Ammo")]
-	private int bombs = 10;
+    private int bombs = 10;
 
     // Temporary
     private Vector4 oldColor;
 
     // SOUND EFFECTS
-	private AudioSource audioSource;
+    private AudioSource audioSource;
     public AudioClip SFX_JUMP;
     public AudioClip SFX_DOUBLE_JUMP;
     public AudioClip SFX_TAUNT;
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-		oldColor = spriteRenderer.color;
+        oldColor = spriteRenderer.color;
 
         audioSource = GetComponent<AudioSource>();
         UI_HANDLER = GameObject.FindObjectOfType<UI_Handler>();
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 
     public void Initialize(GameHandler gameHandler, int ID)
     {
-		this.gameHandler = gameHandler;
+        this.gameHandler = gameHandler;
         this.ID = ID;
         this.bombs = 5;
 
@@ -135,7 +135,9 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        float x = Input.GetAxis("LEFT_STICK_HORIZONTAL");
+        //float x = Input.GetAxis("LEFT_STICK_HORIZONTAL");
+        //float x = Input.GetAxis(JoystickControlls.LEFT_HORIZONTAL[0]);
+        float x = Input.GetAxis(JoystickControlls.LEFT_HORIZONTAL[ID]);
 
         rb2d.velocity = new Vector2(runningSpeed * x, rb2d.velocity.y);
 
@@ -143,17 +145,17 @@ public class Player : MonoBehaviour
         // update animation
         animator.SetFloat("Speed", Mathf.Abs(x));
 
-        if (Input.GetButtonDown("JUMP") && jumps < MAX_JUMPS - 1)
+        if (Input.GetButtonDown(JoystickControlls.RIGHT_BUMPER[ID]) && jumps < MAX_JUMPS - 1)
         {
             Jump();
         }
 
-		if (Input.GetButtonDown("THROW_GRENADE") && bombs > 0)
+        if (Input.GetButtonDown("THROW_GRENADE") && bombs > 0)
         {
-			GameObject obj = Instantiate(PREFAB_BOMB, throwPoint.position, throwPoint.rotation);
+            GameObject obj = Instantiate(PREFAB_BOMB, throwPoint.position, throwPoint.rotation);
             obj.transform.localScale = transform.localScale;
 
-            obj.GetComponent<Bomb>().Initiate(ID,10);
+            obj.GetComponent<Bomb>().Initiate(ID, 10);
 
             bombs--;
             UI_HANDLER.SetUIBombs(ID, bombs.ToString());

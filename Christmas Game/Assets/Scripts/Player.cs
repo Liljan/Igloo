@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+    private UI_Handler UI_HANDLER;
 	private int ID;
     private GameHandler gameHandler;
     public WeaponHandler weaponSystem;
@@ -24,7 +25,6 @@ public class Player : MonoBehaviour
     // physics
     private Rigidbody2D rb2d;
 
-
     // RENDERING
     [Header("Collision")]
     private Animator animator;
@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
 	private int health;
 
     [Header("Ammo")]
-	private int ammo;
 	private int bombs = 10;
 
     // Temporary
@@ -65,6 +64,7 @@ public class Player : MonoBehaviour
 		oldColor = spriteRenderer.color;
 
         audioSource = GetComponent<AudioSource>();
+        UI_HANDLER = GameObject.FindObjectOfType<UI_Handler>();
 
         isGrounded = true;
         health = MAX_HEALTH;
@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
         this.bombs = 5;
 
         weaponSystem.Initiate(this.ID);
+        UI_HANDLER.SetUIBombs(this.ID, bombs.ToString());
     }
 
     private IEnumerator DamageFlash(float dt)
@@ -152,10 +153,10 @@ public class Player : MonoBehaviour
 			GameObject obj = Instantiate(PREFAB_BOMB, throwPoint.position, throwPoint.rotation);
             obj.transform.localScale = transform.localScale;
 
-            obj.GetComponent<Bomb>().Initiate(ID,1);
+            obj.GetComponent<Bomb>().Initiate(ID,10);
 
             bombs--;
-            //mGameHandler.SetAmountOfBombs(mID, mNumberOfBombs);
+            UI_HANDLER.SetUIBombs(ID, bombs.ToString());
         }
 
         if (Input.GetButtonDown("TAUNT"))

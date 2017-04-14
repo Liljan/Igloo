@@ -49,6 +49,11 @@ public class UI_Handler : MonoBehaviour
         playerUI[playerID].SetAmmo(ammo);
     }
 
+    public void SetUIBombs(int playerID, string bombs)
+    {
+        playerUI[playerID].SetBombs(bombs);
+    }
+
     public void EnableVictory(string playerName, Color color)
     {
         victoryText.gameObject.SetActive(true);

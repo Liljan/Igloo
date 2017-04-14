@@ -24,26 +24,38 @@ public class UI_Handler : MonoBehaviour
     public void Initialize(int amountOfPlayers)
     {
         this.amountOfPlayers = amountOfPlayers;
-
+        
         for (int i = 0; i < amountOfPlayers; i++)
         {
             playerUI[i].gameObject.SetActive(true);
+           
         }
     }
 
-    public void SetLivesUI(int playerID, string lives)
+    public void SetUIName(int playerID, string name)
+    {
+        playerUI[playerID].SetName(name);
+    }
+
+    public void SetUIColor(int playerID, Color color)
+    {
+        playerUI[playerID].SetColor(color);
+    }
+
+    public void SetUILives(int playerID, string lives)
     {
         playerUI[playerID].SetLives(lives);
     }
 
-    public void SetAmmoUI(int playerID, string ammo)
+    public void SetUIAmmo(int playerID, string ammo)
     {
         playerUI[playerID].SetAmmo(ammo);
     }
 
-    public void EnableVictory(int playerID)
+    public void EnableVictory(int playerID, Color color)
     {
         victoryText.gameObject.SetActive(true);
+        victoryText.color = color;
     }
 
     public void DisableVictory()

@@ -12,16 +12,6 @@ public class PlayerUI : MonoBehaviour
 
     public Color mColor;
 
-    public void Initiate(string name, string lives, string ammo, string bombs, Color color)
-    {
-        SetName(name);
-        SetLives(lives);
-        SetAmmo(ammo);
-        SetBombs(bombs);
-
-        SetColor(color);
-    }
-
     public void SetAmmo(string ammo)
     {
         mAmmo.text = ammo;

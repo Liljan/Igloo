@@ -18,7 +18,7 @@ public class GameHandler : MonoBehaviour
     // gameplay stats
 
     // Temporary solution, bad
-    private int[] amountOfLives = { 1, 1, 1, 1 };
+    private int[] amountOfLives = { 0, 0, 0, 0 };
 
     void Awake()
     {
@@ -33,7 +33,11 @@ public class GameHandler : MonoBehaviour
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++)
         {
             SpawnPlayer(i);
-            UI_HANDLER.SetLivesUI(i, amountOfLives[i].ToString());
+            amountOfLives[i] = 1;
+
+            UI_HANDLER.SetUILives(i, amountOfLives[i].ToString());
+            UI_HANDLER.SetUIName(i, playerNames[i]);
+            UI_HANDLER.SetUIColor(i, playerColors[i]);
         }
 
         alivePlayers = NUMBER_OF_PLAYERS;
@@ -57,7 +61,7 @@ public class GameHandler : MonoBehaviour
         --amountOfLives[playerID];
 
         if (amountOfLives[playerID] >= 0)
-            UI_HANDLER.SetLivesUI(playerID, amountOfLives[playerID].ToString());
+            UI_HANDLER.SetUILives(playerID, amountOfLives[playerID].ToString());
 
         if (amountOfLives[playerID] > 0)
         {
@@ -75,7 +79,19 @@ public class GameHandler : MonoBehaviour
 
     private IEnumerator Victory(float dt)
     {
-        UI_HANDLER.EnableVictory(1337);
+        // find the player that won -> has the most lives
+        int winnerID = -1;
+        int mostLives = 0;
+
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++)
+        {
+            if(amountOfLives[i] > mostLives)
+            {
+                winnerID = i;
+            }
+        }
+
+        UI_HANDLER.EnableVictory(winnerID, playerColors[winnerID]);
         yield return new WaitForSeconds(dt);
         UI_HANDLER.DisableVictory();
     }

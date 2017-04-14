@@ -87,7 +87,7 @@ public class RangedWeapon : MonoBehaviour
             }
 
             ammoInClip--;
-            UI_HANDLER.SetAmmoUI(playerID, ammoInClip + "/" + ammo);
+            UI_HANDLER.SetUIAmmo(playerID, ammoInClip + "/" + ammo);
 
         }
         else if (Input.GetButton("RELOAD") && !isReloading)
@@ -156,7 +156,7 @@ public class RangedWeapon : MonoBehaviour
         currentReloadTime = 0.0f;
         reloadBar.gameObject.SetActive(true);
 
-        UI_HANDLER.SetAmmoUI(playerID, "Reloading");
+        UI_HANDLER.SetUIAmmo(playerID, "Reloading");
         yield return new WaitForSeconds(dt);
 
         ammo += ammoInClip;
@@ -174,7 +174,7 @@ public class RangedWeapon : MonoBehaviour
 
         isReloading = false;
         reloadBar.gameObject.SetActive(false);
-        UI_HANDLER.SetAmmoUI(playerID, ammoInClip + "/" + ammo);
+        UI_HANDLER.SetUIAmmo(playerID, ammoInClip + "/" + ammo);
     }
 
     private IEnumerator ShowMuzzleFlash(float dt)
@@ -202,7 +202,7 @@ public class RangedWeapon : MonoBehaviour
     public void OnEnable()
     {
         reloadBar.gameObject.SetActive(false);
-        UI_HANDLER.SetAmmoUI(playerID, ammoInClip + "/" + ammo);
+        UI_HANDLER.SetUIAmmo(playerID, ammoInClip + "/" + ammo);
     }
 
     public void OnDisable()

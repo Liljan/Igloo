@@ -150,7 +150,7 @@ public class Player : MonoBehaviour
             Jump();
         }
 
-        if (Input.GetButtonDown("THROW_GRENADE") && bombs > 0)
+        if (Input.GetButtonDown(JoystickControlls.LEFT_BUMPER[ID]) && bombs > 0)
         {
             GameObject obj = Instantiate(PREFAB_BOMB, throwPoint.position, throwPoint.rotation);
             obj.transform.localScale = transform.localScale;
@@ -161,7 +161,7 @@ public class Player : MonoBehaviour
             UI_HANDLER.SetUIBombs(ID, bombs.ToString());
         }
 
-        if (Input.GetButtonDown("TAUNT"))
+        if (Input.GetButtonDown(JoystickControlls.Y[ID]))
         {
             animator.SetTrigger("Taunt");
             audioSource.PlayOneShot(SFX_DEATH);

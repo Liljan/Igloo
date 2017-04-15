@@ -32,29 +32,13 @@ public class ColorSwapper : MonoBehaviour
 
     public void SwapDemoColors()
     {
-        SwapColor(SwapIndex.SkinPrim, ColorFromInt(0x784a00));
-        SwapColor(SwapIndex.SkinSec, ColorFromInt(0x4c2d00));
-        SwapColor(SwapIndex.JacketPrim, ColorFromInt(0xc4ce00));
-        SwapColor(SwapIndex.JacketSec, ColorFromInt(0x784a00));
-        SwapColor(SwapIndex.Pants, ColorFromInt(0x594f00));
+        /* SwapColor(SwapIndex.SkinPrim, ColorFromInt(0x784a00));
+         SwapColor(SwapIndex.SkinSec, ColorFromInt(0x4c2d00));
+         SwapColor(SwapIndex.JacketPrim, ColorFromInt(0xc4ce00));
+         SwapColor(SwapIndex.JacketSec, ColorFromInt(0x784a00));
+         SwapColor(SwapIndex.Pants, ColorFromInt(0x594f00));*/
+        SwapColor(SwapIndex.SkinPrim, Color.red);
         mColorSwapTex.Apply();
-    }
-
-    public static Color ColorFromInt(int c, float alpha = 1.0f)
-    {
-        int r = (c >> 16) & 0x000000FF;
-        int g = (c >> 8) & 0x000000FF;
-        int b = c & 0x000000FF;
-
-        Color ret = ColorFromIntRGB(r, g, b);
-        ret.a = alpha;
-
-        return ret;
-    }
-
-    public static Color ColorFromIntRGB(int r, int g, int b)
-    {
-        return new Color((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f, 1.0f);
     }
 
     public void InitColorSwapTex()

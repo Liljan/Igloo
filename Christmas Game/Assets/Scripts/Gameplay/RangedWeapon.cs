@@ -90,7 +90,7 @@ public class RangedWeapon : MonoBehaviour
             UI_HANDLER.SetUIAmmo(playerID, ammoInClip + "/" + ammo);
 
         }
-        else if (Input.GetButton("RELOAD") && !isReloading)
+        else if (Input.GetButton(JoystickControlls.X[playerID]) && !isReloading)
         {
             if (ammoInClip < clipSize && ammo > 0)
                 StartCoroutine(Reload(RELOAD_TIME));

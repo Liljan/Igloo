@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
@@ -98,6 +99,9 @@ public class GameHandler : MonoBehaviour
 
         yield return new WaitForSeconds(dt);
         UI_HANDLER.DisableVictory();
+
+        // Restart, deprrecated at the moment
+        Application.LoadLevel(Application.loadedLevel);
     }
 
     // Update is called once per frame

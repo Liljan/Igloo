@@ -18,12 +18,15 @@ public enum SwapIndex
 
 public class ColorSwapper : MonoBehaviour
 {
-    private Texture2D mColorSwapTex;
-    private Color[] mSpriteColors;
+    Texture2D mColorSwapTex;
+    Color[] mSpriteColors;
 
-    public SpriteRenderer mSpriteRenderer;
+    SpriteRenderer mSpriteRenderer;
 
-    public void Awake()
+    float mHitEffectTimer = 0.0f;
+    const float cHitEffectTime = 0.1f;
+
+    void Awake()
     {
         mSpriteRenderer = GetComponent<SpriteRenderer>();
         InitColorSwapTex();
@@ -32,13 +35,35 @@ public class ColorSwapper : MonoBehaviour
 
     public void SwapDemoColors()
     {
-        /* SwapColor(SwapIndex.SkinPrim, ColorFromInt(0x784a00));
-         SwapColor(SwapIndex.SkinSec, ColorFromInt(0x4c2d00));
-         SwapColor(SwapIndex.JacketPrim, ColorFromInt(0xc4ce00));
-         SwapColor(SwapIndex.JacketSec, ColorFromInt(0x784a00));
-         SwapColor(SwapIndex.Pants, ColorFromInt(0x594f00));*/
-        SwapColor(SwapIndex.SkinPrim, Color.red);
+       // SwapColor(SwapIndex.SkinPrim, Color.red);
+        //SwapColor(SwapIndex.SkinSec, Color.cyan);
+        SwapColor(SwapIndex.Pants, ColorFromInt(0xc4ce00));
+        SwapColor(SwapIndex.SkinPrim, ColorFromInt(0x784a00));
+        SwapColor(SwapIndex.Pants, ColorFromInt(0x594f00));
         mColorSwapTex.Apply();
+    }
+
+    public void StartHitEffect()
+    {
+        mHitEffectTimer = cHitEffectTime;
+        SwapAllSpritesColorsTemporarily(Color.white);
+    }
+
+    public static Color ColorFromInt(int c, float alpha = 1.0f)
+    {
+        int r = (c >> 16) & 0x000000FF;
+        int g = (c >> 8) & 0x000000FF;
+        int b = c & 0x000000FF;
+
+        Color ret = ColorFromIntRGB(r, g, b);
+        ret.a = alpha;
+
+        return ret;
+    }
+
+    public static Color ColorFromIntRGB(int r, int g, int b)
+    {
+        return new Color((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f, 1.0f);
     }
 
     public void InitColorSwapTex()
@@ -47,9 +72,7 @@ public class ColorSwapper : MonoBehaviour
         colorSwapTex.filterMode = FilterMode.Point;
 
         for (int i = 0; i < colorSwapTex.width; ++i)
-        {
             colorSwapTex.SetPixel(i, 0, new Color(0.0f, 0.0f, 0.0f, 0.0f));
-        }
 
         colorSwapTex.Apply();
 
@@ -57,8 +80,6 @@ public class ColorSwapper : MonoBehaviour
 
         mSpriteColors = new Color[colorSwapTex.width];
         mColorSwapTex = colorSwapTex;
-
-        Debug.Log("Orn");
     }
 
     public void SwapColor(SwapIndex index, Color color)
@@ -67,15 +88,55 @@ public class ColorSwapper : MonoBehaviour
         mColorSwapTex.SetPixel((int)index, 0, color);
     }
 
-    // Use this for initialization
-    void Start()
-    {
 
+    public void SwapColors(List<SwapIndex> indexes, List<Color> colors)
+    {
+        for (int i = 0; i < indexes.Count; ++i)
+        {
+            mSpriteColors[(int)indexes[i]] = colors[i];
+            mColorSwapTex.SetPixel((int)indexes[i], 0, colors[i]);
+        }
+        mColorSwapTex.Apply();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ClearColor(SwapIndex index)
     {
+        Color c = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        mSpriteColors[(int)index] = c;
+        mColorSwapTex.SetPixel((int)index, 0, c);
+    }
 
+    public void SwapAllSpritesColorsTemporarily(Color color)
+    {
+        for (int i = 0; i < mColorSwapTex.width; ++i)
+            mColorSwapTex.SetPixel(i, 0, color);
+        mColorSwapTex.Apply();
+    }
+
+    public void ResetAllSpritesColors()
+    {
+        for (int i = 0; i < mColorSwapTex.width; ++i)
+            mColorSwapTex.SetPixel(i, 0, mSpriteColors[i]);
+        mColorSwapTex.Apply();
+    }
+
+    public void ClearAllSpritesColors()
+    {
+        for (int i = 0; i < mColorSwapTex.width; ++i)
+        {
+            mColorSwapTex.SetPixel(i, 0, new Color(0.0f, 0.0f, 0.0f, 0.0f));
+            mSpriteColors[i] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        }
+        mColorSwapTex.Apply();
+    }
+
+    public void Update()
+    {
+        if (mHitEffectTimer > 0.0f)
+        {
+            mHitEffectTimer -= Time.deltaTime;
+            if (mHitEffectTimer <= 0.0f)
+                ResetAllSpritesColors();
+        }
     }
 }

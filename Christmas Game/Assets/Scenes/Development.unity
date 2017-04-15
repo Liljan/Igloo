@@ -4868,7 +4868,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3227621cf6a4f92469716610cc359479, type: 3}
+    m_Font: {fileID: 12800000, guid: 70110a3f960ba8a44b8b41d0800f7288, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 1
@@ -7309,7 +7309,7 @@ MonoBehaviour:
   - {r: 0, g: 0.672, b: 0, a: 1}
   playerNames:
   - Bruce
-  - Lee's
+  - Lee
   - Relative
   - Jin
   spawnPoints:

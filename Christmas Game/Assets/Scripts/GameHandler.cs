@@ -7,9 +7,13 @@ using UnityEngine.SceneManagement;
 public class GameHandler : MonoBehaviour
 {
     public GameObject PREFAB_PLAYER;
-    public Color[] playerColors;
+    
     public string[] playerNames;
     public Transform[] spawnPoints;
+
+    private Color skinColor = new Color(1.0f, 212.0f / 255.0f, 168.0f / 255.0f, 1.0f);
+    private Color pantsColor = new Color(72F / 255F, 62F / 255F, 62F / 255F, 1F);
+    public Color[] playerColors;
 
     public int NUMBER_OF_PLAYERS = 1;
     private int alivePlayers;
@@ -50,6 +54,9 @@ public class GameHandler : MonoBehaviour
         Player player = playerObj.GetComponent<Player>();
 
         player.Initialize(this, playerIndex);
+
+        PaletteSwap palette = playerObj.GetComponent<PaletteSwap>();
+        palette.SetColors(skinColor, playerColors[playerIndex], pantsColor, 0.1f);
     }
 
     public void RemovePlayer(int playerID, int attackerID)

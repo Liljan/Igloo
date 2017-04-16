@@ -6,6 +6,8 @@ using UnityEngine;
 public class PaletteSwap : MonoBehaviour
 {
     private Material _mat;
+    public SpriteRenderer armSpriteRenderer;
+    public SpriteRenderer ReloadBarSpriteRenderer;
 
     public Color skin_1;
     public Color skin_2;
@@ -23,6 +25,7 @@ public class PaletteSwap : MonoBehaviour
         }
 
         GetComponent<SpriteRenderer>().material = _mat;
+        armSpriteRenderer.material = _mat;
 
         _mat.SetColor("skin_1", skin_1);
         _mat.SetColor("skin_2", skin_2);
@@ -52,9 +55,11 @@ public class PaletteSwap : MonoBehaviour
         _mat.SetColor("jacket_1", jacket_1);
         _mat.SetColor("jacket_2", jacket_2);
         _mat.SetColor("pants", pants);
+
+        ReloadBarSpriteRenderer.color = jacket_1;
     }
 
-    public void Initiate(Color skin, Color jacket, Color pants, float darken)
+    public void SetColors(Color skin, Color jacket, Color pants, float darken)
     {
         skin_1 = skin;
         skin_2 = new Color(skin.r - darken, skin.g - darken, skin.b - darken, 1.0f);
@@ -67,5 +72,7 @@ public class PaletteSwap : MonoBehaviour
         _mat.SetColor("jacket_1", jacket_1);
         _mat.SetColor("jacket_2", jacket_2);
         _mat.SetColor("pants", pants);
+
+        ReloadBarSpriteRenderer.color = jacket_1;
     }
 }

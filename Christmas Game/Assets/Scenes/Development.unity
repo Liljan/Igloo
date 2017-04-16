@@ -523,9 +523,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skin_1: {r: 0.3897059, g: 0.2622413, b: 0.1318123, a: 1}
   skin_2: {r: 0.60294116, g: 0.38746578, b: 0.26157007, a: 1}
-  jacket_1: {r: 1, g: 0, b: 0, a: 1}
-  jacket_2: {r: 0.72794116, g: 0, b: 0, a: 1}
-  jacket_3: {r: 0.7294118, g: 0, b: 0, a: 1}
+  jacket_1: {r: 0, g: 1, b: 0, a: 1}
+  jacket_2: {r: 0, g: 0.697, b: 0, a: 1}
   pants: {r: 0, g: 0, b: 0, a: 1}
 --- !u!212 &151164974
 SpriteRenderer:
@@ -540,7 +539,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5fd16f7619de6f540ba9ede65c7fd8a5, type: 2}
+  - {fileID: 608098668}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3923,7 +3922,7 @@ Prefab:
     - target: {fileID: 224541411166759716, guid: 5021725e13f142649a6cd8ae3bf5dad3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -44.574463
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224541411166759716, guid: 5021725e13f142649a6cd8ae3bf5dad3,
         type: 2}
@@ -4151,7 +4150,7 @@ Prefab:
     - target: {fileID: 224541411166759716, guid: 5021725e13f142649a6cd8ae3bf5dad3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -44.574463
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224541411166759716, guid: 5021725e13f142649a6cd8ae3bf5dad3,
         type: 2}
@@ -4379,6 +4378,29 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 18, y: 0.5}
+--- !u!21 &498656210
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Palette-Swapper
+  m_Shader: {fileID: 4800000, guid: f24cd0ddfd327994e8e3aa966fd343de, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors: []
 --- !u!1 &507959858
 GameObject:
   m_ObjectHideFlags: 0
@@ -4571,6 +4593,29 @@ Transform:
   m_Father: {fileID: 338292511}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &608098668
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Palette-Swapper
+  m_Shader: {fileID: 4800000, guid: f24cd0ddfd327994e8e3aa966fd343de, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors: []
 --- !u!1 &653869358
 GameObject:
   m_ObjectHideFlags: 0
@@ -4602,7 +4647,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5fd16f7619de6f540ba9ede65c7fd8a5, type: 2}
+  - {fileID: 498656210}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4652,7 +4697,6 @@ MonoBehaviour:
   skin_2: {r: 0.93725497, g: 0.5882353, b: 0.38431376, a: 1}
   jacket_1: {r: 1, g: 0, b: 0, a: 1}
   jacket_2: {r: 0.72794116, g: 0, b: 0, a: 1}
-  jacket_3: {r: 0.7294118, g: 0, b: 0, a: 1}
   pants: {r: 0, g: 0, b: 0, a: 1}
 --- !u!95 &653869362
 Animator:
@@ -6229,7 +6273,7 @@ Prefab:
     - target: {fileID: 224541411166759716, guid: 5021725e13f142649a6cd8ae3bf5dad3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -44.574463
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224541411166759716, guid: 5021725e13f142649a6cd8ae3bf5dad3,
         type: 2}
@@ -6481,7 +6525,7 @@ Prefab:
     - target: {fileID: 224541411166759716, guid: 5021725e13f142649a6cd8ae3bf5dad3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -44.574463
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224541411166759716, guid: 5021725e13f142649a6cd8ae3bf5dad3,
         type: 2}

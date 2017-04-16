@@ -46,21 +46,21 @@
 
 			sampler2D _MainTex;
 
-			float4 skin_1;
-			float4 skin_2;
-			float4 jacket_1;
-			float4 jacket_2;
-			float4 pants;
+			uniform float4 skin_1;
+			uniform float4 skin_2;
+			uniform float4 jacket_1;
+			uniform float4 jacket_2;
+			uniform float4 pants;
 
-			float4 frag(v2f i) : SV_Target
+			static const float4 orig_skin_1 = float4(255.0f / 255.0f, 212.0f / 255.0f, 168 / 255.0f, 255.0f / 255.0f);
+			static const float4 orig_skin_2 = float4(239.0f / 255.0f, 150.0f / 255.0f, 98.0f / 255.0f, 255.0f / 255.0f);
+			static const float4 orig_jacket_1 = float4(62.0f / 255.0f, 154.0f / 255.0f, 218.0f / 255.0f, 255.0f / 255.0f);
+			static const float4 orig_jacket_2 = float4(70.0f / 255.0f, 101.0f / 255.0f, 200.0f / 255.0f, 255.0f / 255.0f);
+			static const float4 orig_pants = float4(72.0f / 255.0f, 62.0f / 255.0f, 62.0f / 255.0f, 255.0f / 255.0f);
+
+			inline float4 frag(v2f i) : SV_Target
 			{
 				float4 col = tex2D(_MainTex, i.uv);
-
-				float4 orig_skin_1 = float4(255.0f / 255.0f, 212.0f / 255.0f, 168 / 255.0f, 255.0f / 255.0f);
-				float4 orig_skin_2 = float4(239.0f / 255.0f, 150.0f / 255.0f, 98.0f / 255.0f, 255.0f / 255.0f);
-				float4 orig_jacket_1 = float4(62.0f / 255.0f, 154.0f / 255.0f, 218.0f / 255.0f, 255.0f / 255.0f);
-				float4 orig_jacket_2 = float4(70.0f / 255.0f, 101.0f / 255.0f, 200.0f / 255.0f, 255.0f / 255.0f);
-				float4 orig_pants = float4(72.0f / 255.0f, 62.0f / 255.0f, 62.0f / 255.0f, 255.0f / 255.0f);
 
 				// ugly with conditionals...
 
@@ -70,7 +70,6 @@
 				(all(col.rgb == orig_jacket_2.rgb)) ? jacket_2 :
 				(all(col.rgb == orig_pants.rgb)) ? pants : 
 													col;
-
 
 					return col;
 				}

@@ -4481,6 +4481,7 @@ GameObject:
   - component: {fileID: 653869360}
   - component: {fileID: 653869359}
   - component: {fileID: 653869361}
+  - component: {fileID: 653869362}
   m_Layer: 0
   m_Name: SnowBallFightArt_0
   m_TagString: Untagged
@@ -4548,8 +4549,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mat: {fileID: 2100000, guid: 5fd16f7619de6f540ba9ede65c7fd8a5, type: 2}
-  _IN0: {r: 0.20000002, g: 0.6, b: 0.86666673, a: 1}
-  _OUT0: {r: 1, g: 0, b: 0.84827566, a: 1}
+  skin_1: {r: 1, g: 0.8313726, b: 0.65882355, a: 1}
+  skin_2: {r: 0.93725497, g: 0.5882353, b: 0.38431376, a: 1}
+  jacket_1: {r: 1, g: 0, b: 0, a: 1}
+  jacket_2: {r: 0.72794116, g: 0, b: 0, a: 1}
+  jacket_3: {r: 0.7294118, g: 0, b: 0, a: 1}
+  pants: {r: 0, g: 0, b: 0, a: 1}
+--- !u!95 &653869362
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 653869358}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e23b7e686ace4224e8a7c37e81172b40, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &654371323
 GameObject:
   m_ObjectHideFlags: 0

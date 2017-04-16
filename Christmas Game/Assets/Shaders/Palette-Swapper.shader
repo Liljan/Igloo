@@ -3,7 +3,7 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white"
-		
+
 	}
 
 		SubShader
@@ -46,23 +46,36 @@
 
 			sampler2D _MainTex;
 
-			float4 _IN0;
-			float4 _OUT0;
+			float4 skin_1;
+			float4 skin_2;
+			float4 jacket_1;
+			float4 jacket_2;
+			float4 pants;
 
 			float4 frag(v2f i) : SV_Target
 			{
 				float4 col = tex2D(_MainTex, i.uv);
 
+				float4 orig_skin_1 = float4(255.0f / 255.0f, 212.0f / 255.0f, 168 / 255.0f, 255.0f / 255.0f);
+				float4 orig_skin_2 = float4(239.0f / 255.0f, 150.0f / 255.0f, 98.0f / 255.0f, 255.0f / 255.0f);
+				float4 orig_jacket_1 = float4(62.0f / 255.0f, 154.0f / 255.0f, 218.0f / 255.0f, 255.0f / 255.0f);
+				float4 orig_jacket_2 = float4(70.0f / 255.0f, 101.0f / 255.0f, 200.0f / 255.0f, 255.0f / 255.0f);
+				float4 orig_pants = float4(72.0f / 255.0f, 62.0f / 255.0f, 62.0f / 255.0f, 255.0f / 255.0f);
+
 				// ugly with if:s...
 
-				if (col.r == 0.2)
-					return _OUT0;
+				if (all(col.rgb == orig_skin_1.rgb))
+					return skin_1;
+				if (all(col.rgb == orig_skin_2.rgb))
+					return skin_2;
 
-				/*if (all(col.r == _IN0.r))
-					return _OUT0;*/
+				if (all(col.rgb == orig_jacket_1.rgb))
+					return jacket_1;
+				if (all(col.rgb == orig_jacket_2.rgb))
+					return jacket_2;
 
-					/*if (col.r == _IN0.r)
-						return _OUT0;*/
+				if (all(col.rgb == orig_pants.rgb))
+					return pants;
 
 					return col;
 				}

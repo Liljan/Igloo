@@ -62,20 +62,15 @@
 				float4 orig_jacket_2 = float4(70.0f / 255.0f, 101.0f / 255.0f, 200.0f / 255.0f, 255.0f / 255.0f);
 				float4 orig_pants = float4(72.0f / 255.0f, 62.0f / 255.0f, 62.0f / 255.0f, 255.0f / 255.0f);
 
-				// ugly with if:s...
+				// ugly with conditionals...
 
-				if (all(col.rgb == orig_skin_1.rgb))
-					return skin_1;
-				else if (all(col.rgb == orig_skin_2.rgb))
-					return skin_2;
+				col = (all(col.rgb == orig_skin_1.rgb)) ? skin_1 : 
+				(all(col.rgb == orig_skin_2.rgb)) ? skin_2 :
+				(all(col.rgb == orig_jacket_1.rgb)) ? jacket_1 :
+				(all(col.rgb == orig_jacket_2.rgb)) ? jacket_2 :
+				(all(col.rgb == orig_pants.rgb)) ? pants : 
+													col;
 
-				else if (all(col.rgb == orig_jacket_1.rgb))
-					return jacket_1;
-				else if (all(col.rgb == orig_jacket_2.rgb))
-					return jacket_2;
-
-				else if (all(col.rgb == orig_pants.rgb))
-					return pants;
 
 					return col;
 				}

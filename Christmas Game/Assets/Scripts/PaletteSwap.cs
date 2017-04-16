@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PaletteSwap : MonoBehaviour
 {
-    public Material _mat;
+    //public Material _mat;
+    private Material _mat;
 
     public Color skin_1;
     public Color skin_2;
@@ -17,12 +18,14 @@ public class PaletteSwap : MonoBehaviour
     {
         Shader shader = Shader.Find("Sprites/Palette-Swapper");
 
-        /*
+
         if (_mat == null)
         {
             _mat = new Material(shader);
         }
-        */
+
+        GetComponent<SpriteRenderer>().material = _mat;
+
         _mat.SetColor("skin_1", skin_1);
         _mat.SetColor("skin_2", skin_2);
         _mat.SetColor("jacket_1", jacket_1);

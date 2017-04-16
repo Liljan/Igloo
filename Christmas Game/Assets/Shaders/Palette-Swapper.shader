@@ -66,15 +66,15 @@
 
 				if (all(col.rgb == orig_skin_1.rgb))
 					return skin_1;
-				if (all(col.rgb == orig_skin_2.rgb))
+				else if (all(col.rgb == orig_skin_2.rgb))
 					return skin_2;
 
-				if (all(col.rgb == orig_jacket_1.rgb))
+				else if (all(col.rgb == orig_jacket_1.rgb))
 					return jacket_1;
-				if (all(col.rgb == orig_jacket_2.rgb))
+				else if (all(col.rgb == orig_jacket_2.rgb))
 					return jacket_2;
 
-				if (all(col.rgb == orig_pants.rgb))
+				else if (all(col.rgb == orig_pants.rgb))
 					return pants;
 
 					return col;

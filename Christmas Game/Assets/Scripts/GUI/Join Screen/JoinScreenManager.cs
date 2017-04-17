@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JoinScreenManager : MonoBehaviour {
+    public ColorSlider colorSlider;
+
+    public Color[] playerColors;
 
     void Awake()
     {
-
+        colorSlider.Initiate(playerColors);
     }
 
     // Use this for initialization

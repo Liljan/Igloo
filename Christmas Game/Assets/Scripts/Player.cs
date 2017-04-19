@@ -96,6 +96,11 @@ public class Player : MonoBehaviour
     public void Update()
     {
         Move();
+
+        if (Input.GetButtonDown(JoystickControlls.START[ID]))
+        {
+            gameHandler.Pause();
+        }
     }
 
     private void CheckGrounded()
@@ -166,6 +171,7 @@ public class Player : MonoBehaviour
             animator.SetTrigger("Taunt");
             audioSource.PlayOneShot(SFX_DEATH);
         }
+
     }
 
     private void SetFacingDirection(float xAxis)

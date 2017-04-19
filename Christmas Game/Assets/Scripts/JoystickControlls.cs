@@ -25,4 +25,8 @@ public static class JoystickControlls
     public static string[] B = { "B_1", "B_2", "B_3", "B_4" };
     public static string[] Y = { "Y_1", "Y_2", "Y_3", "Y_4" };
     public static string[] X = { "X_1", "X_2", "X_3", "X_4" };
+
+    // Start and Back
+    public static string[] START = { "START_1", "START_2", "START_3", "START_4" };
+    public static string[] BACK = { "BACK_1", "BACK_2", "BACK_3", "BACK_4" };
 }

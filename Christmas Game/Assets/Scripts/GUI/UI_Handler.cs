@@ -7,6 +7,7 @@ public class UI_Handler : MonoBehaviour
 {
     public PlayerUI[] playerUI;
     public Text victoryText;
+    public GameObject pausePanel;
 
     private int amountOfPlayers;
 
@@ -64,14 +65,20 @@ public class UI_Handler : MonoBehaviour
 
     public void EnableTie()
     {
-        victoryText.gameObject.SetActive(true);
         victoryText.text = "Tie!\nIs that even possible?!";
+        victoryText.gameObject.SetActive(true);     
     }
 
     public void DisableVictory()
     {
         victoryText.gameObject.SetActive(false);
     }
+
+    public void ShowPause(bool b)
+    {
+        pausePanel.gameObject.SetActive(b);
+    }
+
 
     // Update is called once per frame
     void Update()

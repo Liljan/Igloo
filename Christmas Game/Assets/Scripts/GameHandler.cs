@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameHandler : MonoBehaviour
 {
     public GameObject PREFAB_PLAYER;
-    
+
     public string[] playerNames;
     public Transform[] spawnPoints;
 
@@ -19,6 +19,8 @@ public class GameHandler : MonoBehaviour
     private int alivePlayers;
 
     private UI_Handler UI_HANDLER;
+
+    private bool isPaused = false;
 
     // gameplay stats
 
@@ -115,5 +117,21 @@ public class GameHandler : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void Pause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            UI_HANDLER.ShowPause(true);
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            UI_HANDLER.ShowPause(false);
+            Time.timeScale = 1.0f;
+        }
     }
 }

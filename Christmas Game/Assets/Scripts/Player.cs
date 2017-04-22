@@ -210,4 +210,10 @@ public class Player : MonoBehaviour
     {
         return ID;
     }
+
+    public void ApplyVelocity(Vector3 vel)
+    {
+        //rb2d.AddForce(force);
+        rb2d.velocity = vel;
+    }
 }

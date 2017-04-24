@@ -122,7 +122,6 @@ public class Player : MonoBehaviour
         GameObject g = Instantiate(PREFAB_TEXT_POPUP, transform.position + 0.5f * new Vector3(0.0f, 0.0f, -0.1f), Quaternion.identity);
         g.GetComponent<TextMesh>().text = "-" + dmg;
 
-
         if (health <= 0)
         {
             Instantiate(PREFAB_DEATH_PARTICLES, transform.position, Quaternion.identity);
@@ -140,14 +139,12 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        //float x = Input.GetAxis("LEFT_STICK_HORIZONTAL");
-        //float x = Input.GetAxis(JoystickControlls.LEFT_HORIZONTAL[0]);
         float x = Input.GetAxis(JoystickControlls.LEFT_HORIZONTAL[ID]);
 
         rb2d.velocity = new Vector2(runningSpeed * x, rb2d.velocity.y);
 
         SetFacingDirection(x);
-        // update animation
+
         animator.SetFloat("Speed", Mathf.Abs(x));
 
         if (Input.GetButtonDown(JoystickControlls.RIGHT_BUMPER[ID]) && jumps < MAX_JUMPS - 1)
@@ -216,4 +213,6 @@ public class Player : MonoBehaviour
         //rb2d.AddForce(force);
         rb2d.velocity = vel;
     }
+
+
 }

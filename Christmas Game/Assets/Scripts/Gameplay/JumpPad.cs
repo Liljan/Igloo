@@ -15,7 +15,7 @@ public class JumpPad : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        animator.SetTrigger("Jump");
+        
 
         if (col.tag.Equals("Player"))
         {
@@ -23,8 +23,8 @@ public class JumpPad : MonoBehaviour
 
             if (p)
             {
+                animator.SetTrigger("Jump");
                 p.ApplyVelocity(magnitude * Vector3.up);
-                Debug.Log("pushed");
             }
         }
     }

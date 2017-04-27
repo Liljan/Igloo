@@ -30,4 +30,9 @@ public class JoystickMenuButton : JoystickMenuItem
             text.text = innerText;
         }
     }
+
+    public void Activate()
+    {
+
+    }
 }

@@ -74,7 +74,7 @@ public class JoystickMenuList : JoystickMenuItem
     {
         this.playerID = playerID;
         Debug.Log(playerID);
-        verticalAxis = AxisAsButton.CreateAxisAsButton(JoystickControlls.D_PAD_HORIZONTAL[playerID]);
+        verticalAxis = AxisAsButton.CreateAxisAsButton(JoystickControlls.D_PAD_VERTICAL[playerID]);
         text.color = menuHandler.playerColors[playerID];
         itemIndex = playerID;
     }

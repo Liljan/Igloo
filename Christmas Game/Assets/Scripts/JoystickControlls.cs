@@ -11,7 +11,7 @@ public static class JoystickControlls
 
     // D-Pad
     public static string[] D_PAD_HORIZONTAL = { "D_PAD_HORIZONTAL_1", "D_PAD_HORIZONTAL_2", "D_PAD_HORIZONTAL_3", "D_PAD_HORIZONTAL_4" };
-    public static string[] D_PAD_VERTICAL = { "D_PAD_VERTICAL_1", "LEFT_VERTICAL_2", "LEFT_VERTICAL_3", "LEFT_VERTICAL_4" };
+    public static string[] D_PAD_VERTICAL = { "D_PAD_VERTICAL_1", "D_PAD_VERTICAL_2", "D_PAD_VERTICAL_3", "D_PAD_VERTICAL_4" };
 
     // Triggers
     public static string[] RIGHT_TRIGGER = { "RIGHT_TRIGGER_1", "RIGHT_TRIGGER_2", "RIGHT_TRIGGER_3", "RIGHT_TRIGGER_4" };

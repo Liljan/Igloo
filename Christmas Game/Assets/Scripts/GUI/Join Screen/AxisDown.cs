@@ -26,7 +26,9 @@ public class AxisAsButton : MonoBehaviour
 
     public static AxisAsButton CreateAxisAsButton(string axis)
     {
-        AxisAsButton thisObj = Obj.AddComponent<AxisAsButton>();
+        GameObject go = new GameObject();
+        //AxisAsButton thisObj = Obj.AddComponent<AxisAsButton>();
+        AxisAsButton thisObj = go.AddComponent<AxisAsButton>();
         thisObj.axis = axis;
         return thisObj;
     }
@@ -37,9 +39,6 @@ public class AxisAsButton : MonoBehaviour
     public float IsDown()
     {
         float axisValue = Input.GetAxisRaw(axis);
-
-        if (axisValue != 0F)
-            Debug.Log(axisValue);
 
         if (axisValue > 0.0f)
         {

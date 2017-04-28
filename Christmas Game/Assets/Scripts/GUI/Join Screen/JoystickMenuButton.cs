@@ -35,4 +35,9 @@ public class JoystickMenuButton : JoystickMenuItem
     {
 
     }
+
+    public override void SetID(int playerID)
+    {
+        this.playerID = playerID;
+    }
 }

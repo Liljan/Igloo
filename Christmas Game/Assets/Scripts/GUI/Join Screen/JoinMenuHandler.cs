@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class JoinMenuHandler : MonoBehaviour
 {
-    //public JoystickMenuItem[] menuItems;
-
     public List<JoystickMenuItem> menuItems;
     public int playerID;
 
     private int selectedItem = 0;
 
+    private AxisAsButton horizontal;
+    private AxisAsButton vertical;
+
     // Use this for initialization
     public void Awake()
     {
-
+        horizontal = AxisAsButton.CreateAxisAsButton(JoystickControlls.LEFT_HORIZONTAL[playerID]);
+        vertical = AxisAsButton.CreateAxisAsButton(JoystickControlls.LEFT_VERTICAL[playerID]);
     }
 
     public void Start()
@@ -25,10 +27,12 @@ public class JoinMenuHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-            SwitchLeft();
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        float xAxis = horizontal.IsDown();
+
+        if (xAxis > 0.0f)
             SwitchRight();
+        if (xAxis < 0.0f)
+            SwitchLeft();
     }
 
     private void SwitchRight()

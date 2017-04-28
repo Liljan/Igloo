@@ -689,6 +689,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1320174827}
+  - component: {fileID: 1320174828}
   m_Layer: 5
   m_Name: CustomButton
   m_TagString: Untagged
@@ -715,6 +716,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 257.78, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1320174828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1320174826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf42805a7a1e1a42bd889f7ec2adfce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1150460830}
+  innerText: First
 --- !u!1 &1336397192
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuItems:
-  - {fileID: 0}
+  - {fileID: 1320174828}
   - {fileID: 691758509}
   playerID: 0
 --- !u!114 &1465258200
